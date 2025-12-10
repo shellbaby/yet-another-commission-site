@@ -32,21 +32,21 @@ export default function Page() {
 
                     <h2 className="mt-8"> Contacts</h2>
                     <p className="mt-4 indent-8">You can find me here, too!</p>
-                    <ul className="mt-4 [&>li]:mb-1 [&>li:last-child]:mb-0 [&>li>a]:flex [&>li>a]:items-center [&>li>a>svg]:mr-1">
+                    <ul className="mt-4 [&>li]:mb-1 [&>li]:w-fit [&>li]:underline [&>li:last-child]:mb-0 [&>li>a]:flex [&>li>a]:items-center [&>li>a>svg]:mr-1">
                         <li>
-                            <a>
+                            <a href="https://bsky.app/profile/nikkoscribblo.bsky.social">
                                 <SiBluesky size={16} />
                                 <span>Bluesky</span>
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a href="https://www.twitch.tv/cookiecollie">
                                 <SiTwitch size={16} />
                                 <span>Twitch</span>
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a href="https://ko-fi.com/cookiecollie">
                                 <SiKofi size={16} />
                                 <span>Ko-fi</span>
                             </a>
@@ -60,6 +60,16 @@ export default function Page() {
                     width={400}
                     height={400}
                     className="rounded-full border-4 border-red-400"
+                />
+            </div>
+
+            <div className="relative mt-8 h-[15rem] overflow-hidden">
+                <Image
+                    src={"/footer_img.png"}
+                    width={4096}
+                    height={4096}
+                    alt="Footer Image"
+                    className="absolute -top-[4rem]"
                 />
             </div>
         </div>

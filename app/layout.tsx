@@ -46,10 +46,15 @@ export default function RootLayout({
         <html lang="en" className={FiraCodeMono.className}>
             <body>
                 <header className="mt-4">
-                    <nav className="flex h-20 items-center justify-between">
-                        <Link href={"/"}>home</Link>
+                    <nav className="flex h-20 items-center justify-between [&_a]:hover:underline">
+                        <Link
+                            href={"/"}
+                            className="flex h-full items-center px-2"
+                        >
+                            home
+                        </Link>
                         <div className="flex h-full items-center gap-4 [&>a]:flex [&>a]:h-full [&>a]:items-center [&>a]:px-2">
-                            <Link href={"/"}>commission</Link>
+                            <Link href={"/commission"}>commission</Link>
                             <Link href={"/"}>contact</Link>
                         </div>
                     </nav>
@@ -58,6 +63,12 @@ export default function RootLayout({
                 <span className="mt-4 block h-1 w-full bg-red-400" />
 
                 {children}
+
+                <div className="my-8 text-center">
+                    <small>
+                        Copyright 2025 shellbaby. All Rights Reserved.
+                    </small>
+                </div>
             </body>
         </html>
     )
