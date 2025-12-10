@@ -1,0 +1,11 @@
+:root {
+    --page-root-width: 50rem;
+    --page-root-padding-inline: 3rem;
+    --page-root-padding-block: 3rem; 
+}
+
+#main {
+    width: var(--page-root-width);
+    padding: var(--page-root-padding-block) var(--page-root-padding-inline);
+    margin-inline: auto;
+}

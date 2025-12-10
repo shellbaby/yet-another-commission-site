@@ -13,13 +13,14 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "15.5.6",
+    "next": "15.5.7",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@ark-ui/react": "^5.26.2",
     "@eslint/eslintrc": "^3",
+    "@icons-pack/react-simple-icons": "^13.8.0",
     "@next/eslint-plugin-next": "^15.5.6",
     "@stylistic/eslint-plugin": "^5.5.0",
     "@tailwindcss/postcss": "^4",
