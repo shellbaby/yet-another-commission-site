@@ -1,5 +1,6 @@
-import { SiBluesky, SiKofi, SiTwitch } from "@icons-pack/react-simple-icons"
+import { Button, Mark } from "@/components"
 import Image from "next/image"
+import Link from "next/link"
 import "./page.css"
 
 export default function Page() {
@@ -15,43 +16,37 @@ export default function Page() {
                     </p>
 
                     <p className="mt-4 indent-8">
-                        I occasionally stream on{" "}
-                        <a
-                            href="https://www.twitch.tv/cookiecollie"
-                            className="text-[#6441a4] underline"
-                        >
-                            Twitch
-                        </a>
+                        I occasionally stream on
+                        <Mark color="#9147ff">
+                            <a href="https://www.twitch.tv/cookiecollie">
+                                Twitch
+                            </a>
+                        </Mark>
                         , too! Feel free to drop by if you like! 
                     </p>
 
                     <h2 className="mt-8">󰸌 Commission</h2>
                     <p className="mt-4 indent-8">
-                        Wanna commission me? Here&#39;s how! &#60;==
+                        Wanna commission me? Here&#39;s
+                        <Mark>
+                            <Link href={"/commission"}>how</Link>
+                        </Mark>
+                        ! &#60;==
                     </p>
 
                     <h2 className="mt-8"> Contacts</h2>
                     <p className="mt-4 indent-8">You can find me here, too!</p>
-                    <ul className="mt-4 [&>li]:mb-1 [&>li]:w-fit [&>li]:underline [&>li:last-child]:mb-0 [&>li>a]:flex [&>li>a]:items-center [&>li>a>svg]:mr-1">
-                        <li>
-                            <a href="https://bsky.app/profile/nikkoscribblo.bsky.social">
-                                <SiBluesky size={16} />
-                                <span>Bluesky</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.twitch.tv/cookiecollie">
-                                <SiTwitch size={16} />
-                                <span>Twitch</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://ko-fi.com/cookiecollie">
-                                <SiKofi size={16} />
-                                <span>Ko-fi</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div className="mt-4 flex gap-2">
+                        <a href="https://bsky.app/profile/nikkoscribblo.bsky.social">
+                            <Button color="#006aff">Bluesky</Button>
+                        </a>
+                        <a href="https://www.twitch.tv/cookiecollie">
+                            <Button color="#9147ff">Twitch</Button>
+                        </a>
+                        <a href="https://ko-fi.com/cookiecollie">
+                            <Button color="#ff5a16">Ko-fi</Button>
+                        </a>
+                    </div>
                 </div>
 
                 <Image
@@ -59,7 +54,7 @@ export default function Page() {
                     alt="Profile pic"
                     width={400}
                     height={400}
-                    className="rounded-full border-4 border-red-400"
+                    className="roud rounded-full border-4 border-red-400"
                 />
             </div>
 

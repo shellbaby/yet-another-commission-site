@@ -1,0 +1,26 @@
+#commission-item {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-block: calc(var(--spacing) * 12);
+}
+
+#commission-price {
+    font-size: var(--text-h3);
+}
+
+#commission-description {
+    margin-top: calc(var(--spacing) * 2);
+    & > li {
+        list-style: inside square;
+        margin-top: calc(var(--spacing) * 1);
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+#commission-request {
+    grid-column: span 2 / span 2;
+    margin-top: calc(var(--spacing) * 4);
+}

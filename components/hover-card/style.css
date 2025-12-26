@@ -1,0 +1,7 @@
+[data-scope="hover-card"] {
+    &[data-part="content"] {
+        background: white;
+        position: relative;
+        outline: 1px solid black;
+    }
+}

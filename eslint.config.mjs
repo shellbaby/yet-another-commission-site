@@ -24,7 +24,7 @@ const eslintConfig = [
                 { component: true, html: true },
             ],
             "react/display-name": "off",
-            // "@typescript-eslint/no-empty-object-type": "off"
+            "@typescript-eslint/no-empty-object-type": "warn"
         },
         ignores: [
             "node_modules/**",

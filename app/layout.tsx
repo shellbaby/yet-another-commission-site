@@ -1,3 +1,4 @@
+import { HoverCard } from "@/components"
 import localFont from "next/font/local"
 import Link from "next/link"
 import "./globals.css"
@@ -54,7 +55,24 @@ export default function RootLayout({
                             home
                         </Link>
                         <div className="flex h-full items-center gap-4 [&>a]:flex [&>a]:h-full [&>a]:items-center [&>a]:px-2">
-                            <Link href={"/commission"}>commission</Link>
+                            <HoverCard.Root
+                                openDelay={0}
+                                positioning={{ gutter: -14 }}
+                            >
+                                <HoverCard.Trigger asChild>
+                                    <Link href={"/commission"}>commission</Link>
+                                </HoverCard.Trigger>
+                                <HoverCard.Content>
+                                    <div className="flex flex-col [&>a]:px-4 [&>a]:py-2 [&>a:hover]:bg-gray-700 [&>a:hover]:text-white">
+                                        <Link href={"/tos"}>
+                                            terms of service
+                                        </Link>
+                                        <Link href={"/form"}>
+                                            commission form
+                                        </Link>
+                                    </div>
+                                </HoverCard.Content>
+                            </HoverCard.Root>
                             <Link href={"/"}>contact</Link>
                         </div>
                     </nav>

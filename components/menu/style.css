@@ -1,0 +1,11 @@
+[data-scope="menu"] {
+    &[data-part="content"] {
+        background: white;
+        outline: 1px solid black;
+        box-shadow: var(--shadows-lg);
+        
+    }
+    
+    &[data-part="item"] {
+    }
+}

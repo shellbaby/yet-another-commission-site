@@ -1,0 +1,12 @@
+[data-scope="accordion"] {
+    &[data-part="root"] {
+    }
+    &[data-part="item"] {
+    }
+    &[data-part="item-trigger"] {
+    }
+    &[data-part="item-indicator"] {
+    }
+    &[data-part="item-content"] {
+    }
+}

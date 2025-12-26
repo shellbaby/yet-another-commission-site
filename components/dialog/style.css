@@ -1,0 +1,57 @@
+[data-scope="dialog"] {
+    &[data-part="backdrop"] {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(4px);
+        position: fixed;
+        z-index: 1300;
+        height: 100vh;
+        width: 100vw;
+        left: 0;
+        top: 0;
+    }
+
+    &[data-part="positioner"] {
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 1400;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    &[data-part="content"] {
+        --border-radius: 0.5rem;
+        --min-width: 24rem;
+
+        background: white;
+        min-width: var(--min-width);
+        border: 1px solid black;
+        border-radius: var(--border-radius);
+        position: relative;
+    }
+
+    &[data-part="close-trigger"] {
+        --margin: 0.5rem;
+        --size: 2.25rem;
+
+        position: absolute;
+        right: var(--margin);
+        top: var(--margin);
+        height: var(--size);
+        width: var(--size);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        isolation: isolate;
+        border-radius: .25rem;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
