@@ -76,3 +76,13 @@ h6 {
 small {
     font-size: 0.833rem;
 }
+
+ul {
+    li {
+        list-style: inside square;
+        margin-top: calc(var(--spacing) * 1);
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}

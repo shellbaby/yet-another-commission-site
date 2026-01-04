@@ -1,6 +1,5 @@
 import { ark } from "@ark-ui/react/factory"
 import { ButtonHTMLAttributes, CSSProperties } from "react"
-import "./style.css"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     asChild?: boolean

@@ -1,11 +1,11 @@
 import { Accordion as ArkAccordion } from "@ark-ui/react/accordion"
 import { ReactNode } from "react"
-import "./style.css"
 
 interface RootProps extends ArkAccordion.RootProps {}
 export const Accordion = (props: RootProps) => {
     return <ArkAccordion.Root {...props} />
 }
+Accordion.Root = Accordion
 
 interface ItemProps extends ArkAccordion.ItemProps {}
 const Item = (props: ItemProps) => {

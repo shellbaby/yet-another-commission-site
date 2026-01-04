@@ -73,7 +73,7 @@ export default function Page() {
 
                 <div id="commission-item">
                     <div>
-                        <h3>Ref Sheet</h3>
+                        <h3>Reference Sheet</h3>
                         <p id="commission-price">$75</p>
                         <ul id="commission-description">
                             <li>Flat Color</li>

@@ -1,5 +1,4 @@
 import { CSSProperties, HTMLAttributes } from "react"
-import "./style.css"
 
 interface MarkProps extends HTMLAttributes<HTMLElement> {
     color?: string

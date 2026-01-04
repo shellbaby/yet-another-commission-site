@@ -1,0 +1,47 @@
+[data-scope="field"] {
+    &[data-part="root"] {
+        --gap: calc(var(--spacing) * 1);
+        --input-height: calc(var(--spacing) * 10);
+        --border-radius: var(--radius-md);
+        --input-p-inline: calc(var(--spacing) * 4);
+        --input-p-block: calc(var(--spacing) * 2);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+    }
+
+    &[data-part="label"] {
+        font-weight: var(--font-weight-medium);
+        &:has(+ :required, [data-required])::after {
+            content: "*";
+        }
+    }
+
+    &[data-part="input"] {
+        width: 100%;
+        height: var(--input-height);
+        border: 1px solid black;
+        border-radius: var(--border-radius);
+        outline: none;
+        padding-inline: var(--input-p-inline);
+
+        &:has([data-style="icon"]) {
+        }
+    }
+
+    &[data-part="textarea"] {
+        min-height: calc(var(--spacing) * 24);
+        border: 1px solid black;
+        border-radius: var(--border-radius);
+        outline: none;
+        padding-inline: var(--input-p-inline);
+        padding-block: var(--input-p-block);
+    }
+
+    &[data-part="helper-text"] {
+    }
+
+    &[data-part="error-text"] {
+    }
+}

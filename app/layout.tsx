@@ -1,6 +1,7 @@
 import { HoverCard } from "@/components"
 import localFont from "next/font/local"
 import Link from "next/link"
+import "../components/style"
 import "./globals.css"
 import "./layout.css"
 

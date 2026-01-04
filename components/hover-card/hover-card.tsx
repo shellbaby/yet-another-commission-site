@@ -1,6 +1,5 @@
 import { HoverCard as ArkHoverCard } from "@ark-ui/react/hover-card"
 import { Portal } from "@ark-ui/react/portal"
-import "./style.css"
 
 interface RootProps extends ArkHoverCard.RootProps {}
 export const HoverCard = (props: RootProps) => {

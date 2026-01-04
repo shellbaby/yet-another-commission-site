@@ -1,0 +1,26 @@
+[data-scope="checkbox"] {
+    &[data-part="root"] {
+        display: flex;
+        gap: calc(var(--spacing) * 2);
+        align-items: flex-start;
+    }
+
+    &[data-part="control"] {
+        --size: calc(var(--spacing) * 6);
+
+        border: 1px solid black;
+        border-radius: var(--radius-sm);
+        aspect-ratio: 1;
+        width: var(--size);
+        height: var(--size);
+        display: grid;
+        place-items: center;
+        color: white;
+        cursor: pointer;
+
+        &:is(:checked, [data-state="checked"]) {
+            background: purple;
+            border-color: purple;
+        }
+    }
+}
