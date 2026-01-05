@@ -74,7 +74,8 @@ export default function RootLayout({
                                     </div>
                                 </HoverCard.Content>
                             </HoverCard.Root>
-                            <Link href={"/"}>contact</Link>
+                            <Link href={"/gallery"}>gallery</Link>
+                            <Link href={"/contact"}>contact</Link>
                         </div>
                     </nav>
                 </header>

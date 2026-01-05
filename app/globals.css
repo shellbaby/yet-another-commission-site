@@ -4,13 +4,19 @@
     --background: #ffffff;
     --foreground: #171717;
     --radius-full: 9999px;
+}
 
+@theme {
     --text-h1: 2.986rem;
     --text-h2: 2.488rem;
     --text-h3: 2.074rem;
     --text-h4: 1.728rem;
     --text-h5: 1.44rem;
     --text-h6: 1.2rem;
+
+    --color-telegram: #24a1de;
+    --color-discord: #7289da;
+    --color-bluesky: #006aff;
 }
 
 @theme inline {
@@ -19,19 +25,19 @@
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
 
-    --text-h1: var(--text-h1);
+    /* --text-h1: var(--text-h1);
     --text-h2: var(--text-h2);
     --text-h3: var(--text-h3);
     --text-h4: var(--text-h4);
     --text-h5: var(--text-h5);
-    --text-h6: var(--text-h6);
+    --text-h6: var(--text-h6); */
 }
 
 body {
     background: var(--background);
     color: var(--foreground);
 
-    max-width: var(--breakpoint-sm);
+    max-width: var(--breakpoint-md);
     margin: 0 auto;
 }
 
