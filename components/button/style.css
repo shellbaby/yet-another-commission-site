@@ -1,7 +1,7 @@
 [data-scope="button"] {
     --height: 40px;
     --border-radius: 0.75rem;
-    --padding: 8px 16px;
+    --padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
     --color: purple;
     --width: auto;
 
@@ -13,6 +13,10 @@
         padding: var(--padding);
         cursor: pointer;
         color: var(--color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
 
         &:hover {
             background: var(--color);

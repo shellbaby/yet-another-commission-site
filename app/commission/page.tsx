@@ -5,15 +5,19 @@ import "./style.css"
 export default function Page() {
     return (
         <div>
-            <div className="mt-8">
+            <div className="my-12">
                 <h2 className="text-center">Commission Price</h2>
-                <div className="mt-4 flex flex-col justify-center gap-4">
+                <div className="mt-4 grid grid-cols-2 gap-4">
                     <Link href={"/tos"}>
                         <Button width="full">Terms of Service</Button>
                     </Link>
-                    <Button>Commission Form</Button>
+                    <Link href={"/form"}>
+                        <Button width="full">Commission Form</Button>
+                    </Link>
                 </div>
             </div>
+
+            <hr />
 
             <div id="commission-content">
                 <div id="commission-item">
@@ -23,7 +27,6 @@ export default function Page() {
                         <ul id="commission-description">
                             <li>Colored with Simple Shading</li>
                             <li>Free Light-mode Version</li>
-                            <li>1024x1024 Pixels</li>
                         </ul>
                     </div>
                     <div>image</div>
@@ -41,7 +44,6 @@ export default function Page() {
                         <ul id="commission-description">
                             <li>Colored with Simple Shading</li>
                             <li>Simple Background</li>
-                            <li>4096x4096 Pixels</li>
                         </ul>
                     </div>
                     <div>Image</div>
@@ -60,7 +62,6 @@ export default function Page() {
                             <li>Colored with Simple Shading</li>
                             <li>Simple Background</li>
                             <li>Simple Pose</li>
-                            <li>4096x4096 Pixels</li>
                         </ul>
                     </div>
                     <div>Image</div>
@@ -92,9 +93,16 @@ export default function Page() {
 
             <hr />
 
-            <div className="mt-8 flex flex-col gap-4 text-center">
-                <p>Got something that you like? Commission me right away!</p>
-                <Button>Commission Form</Button>
+            <div className="mt-12 text-center">
+                <p className="text-h6">
+                    Got something that you like? Commission me right away!
+                </p>
+
+                <Link href={"/form"}>
+                    <Button width="full" className="mt-6">
+                        Commission Form
+                    </Button>
+                </Link>
             </div>
         </div>
     )

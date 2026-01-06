@@ -1,0 +1,15 @@
+[data-scope="popover"] {
+    &[data-part="trigger"] {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 1);
+        cursor: pointer;
+    }
+
+    &[data-part="content"] {
+        background: white;
+        box-shadow: var(--shadow-md);
+        display: flex;
+        flex-direction: column;
+    }
+}

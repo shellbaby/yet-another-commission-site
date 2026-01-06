@@ -17,6 +17,8 @@
     --color-telegram: #24a1de;
     --color-discord: #7289da;
     --color-bluesky: #006aff;
+    --color-twitch: #9147ff;
+    --color-kofi: #ff5a16;
 }
 
 @theme inline {
@@ -24,13 +26,6 @@
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
-
-    /* --text-h1: var(--text-h1);
-    --text-h2: var(--text-h2);
-    --text-h3: var(--text-h3);
-    --text-h4: var(--text-h4);
-    --text-h5: var(--text-h5);
-    --text-h6: var(--text-h6); */
 }
 
 body {
@@ -86,7 +81,7 @@ small {
 ul {
     li {
         list-style: inside square;
-        margin-top: calc(var(--spacing) * 1);
+        margin-top: calc(var(--spacing) * 2);
         &:first-child {
             margin-top: 0;
         }

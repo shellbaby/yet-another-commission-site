@@ -27,37 +27,39 @@ export default function Page() {
             </div>
             <div>
                 <h5 className="text-center">...or through this form</h5>
-                <div className="mt-4 rounded-md border-2 p-4">
-                    <Field.Root>
-                        <Field.Label>Name</Field.Label>
-                        <Field.Input placeholder="Name / Nickname" />
-                        <Field.ErrorText />
-                    </Field.Root>
+                <div className="mt-4 rounded-md border-2 p-6">
+                    <form className="flex flex-col gap-6">
+                        <Field.Root required>
+                            <Field.Label>Name</Field.Label>
+                            <Field.Input placeholder="Name / Nickname" />
+                            <Field.ErrorText />
+                        </Field.Root>
 
-                    <Field.Root className="mt-4">
-                        <Field.Label>Email</Field.Label>
-                        <Field.Input
-                            type="email"
-                            placeholder="your@email.com"
-                        />
-                        <Field.ErrorText />
-                    </Field.Root>
+                        <Field.Root required>
+                            <Field.Label>Email</Field.Label>
+                            <Field.Input
+                                type="email"
+                                placeholder="your@email.com"
+                            />
+                            <Field.ErrorText />
+                        </Field.Root>
 
-                    <Field.Root className="mt-4">
-                        <Field.Label>Subject</Field.Label>
-                        <Field.Input />
-                        <Field.ErrorText />
-                    </Field.Root>
+                        <Field.Root required>
+                            <Field.Label>Subject</Field.Label>
+                            <Field.Input />
+                            <Field.ErrorText />
+                        </Field.Root>
 
-                    <Field.Root className="mt-4">
-                        <Field.Label>Message</Field.Label>
-                        <Field.Textarea autoresize />
-                        <Field.ErrorText />
-                    </Field.Root>
+                        <Field.Root required>
+                            <Field.Label>Message</Field.Label>
+                            <Field.Textarea autoresize />
+                            <Field.ErrorText />
+                        </Field.Root>
 
-                    <div className="mt-4 flex justify-end">
-                        <Button>Send</Button>
-                    </div>
+                        <div className="flex justify-end">
+                            <Button type="submit">Send</Button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

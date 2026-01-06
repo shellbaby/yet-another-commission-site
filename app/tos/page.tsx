@@ -1,16 +1,20 @@
 "use client"
 
 import { Accordion } from "@/components"
-import { CaretDownIcon } from "@phosphor-icons/react"
+import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
 
 export default function Page() {
     return (
-        <div className="mt-8">
-            <h2 className="text-center">Terms of Service</h2>
-            <Accordion.Root className="mt-8" defaultValue={["general"]}>
+        <div>
+            <h2 className="my-12 text-center">Terms of Service</h2>
+            <Accordion.Root defaultValue={["general"]}>
                 <Accordion.Item value="general">
-                    <Accordion.ItemTrigger indicator={<CaretDownIcon />}>
+                    <Accordion.ItemTrigger>
                         General TOS
+                        <Accordion.ItemIndicator>
+                            <HugeiconsIcon icon={ArrowDown01Icon} />
+                        </Accordion.ItemIndicator>
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <ul>
@@ -19,14 +23,14 @@ export default function Page() {
                                 purposes, including posting on social media
                                 platforms or galleries; as long as you do NOT
                                 claim them as your own or make any profit from
-                                them. Proper credits must be included.
+                                them. Proper credits MUST be included.
                             </li>
 
                             <li>
-                                I do not have the right to reserve the finished
-                                commissions forever. It is the duty of the
-                                commissioner to save and reserve the
-                                commissioned artworks.
+                                Two versions of the drawing will be provided to
+                                you: one is for posting online, the other is the
+                                full resolution. You MUST use the one marked for
+                                posting online for such purpose.
                             </li>
 
                             <li>
@@ -42,11 +46,11 @@ export default function Page() {
 
                             <li>
                                 All the rights regarding the artworks belong to
-                                me, including posting them on social media
-                                platforms, streaming the process, or using them
-                                for promotional purposes. Commissioners can ask
-                                for non-disclosure of the artwork if it is
-                                private.
+                                me, including posting them, streaming, or using
+                                them for promotional purposes. Please ask
+                                beforehand if you wish to keep it private, I
+                                will try to alter the colors of your character
+                                before posting the piece.
                             </li>
 
                             <li>
@@ -56,8 +60,8 @@ export default function Page() {
                             </li>
 
                             <li>
-                                No alteration to the finished artworks should be
-                                made without my approval.
+                                No modifications to the finished artworks should
+                                be made without my approval.
                             </li>
 
                             <li>
@@ -82,12 +86,21 @@ export default function Page() {
                                 modifying, NFT, or hateful purposes.
                             </li>
                         </ul>
+
+                        <h6 className="mt-6 text-center">
+                            Failure to follow the ToS will result in a total
+                            termination of any service, and a slot in the
+                            blacklist
+                        </h6>
                     </Accordion.ItemContent>
                 </Accordion.Item>
 
                 <Accordion.Item value="acceptable">
-                    <Accordion.ItemTrigger indicator={<CaretDownIcon />}>
+                    <Accordion.ItemTrigger>
                         I will/will not draw
+                        <Accordion.ItemIndicator>
+                            <HugeiconsIcon icon={ArrowDown01Icon} />
+                        </Accordion.ItemIndicator>
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <h6>I will draw</h6>
@@ -113,19 +126,21 @@ export default function Page() {
                 </Accordion.Item>
 
                 <Accordion.Item value="extras">
-                    <Accordion.ItemTrigger indicator={<CaretDownIcon />}>
+                    <Accordion.ItemTrigger>
                         Extra Info
+                        <Accordion.ItemIndicator>
+                            <HugeiconsIcon icon={ArrowDown01Icon} />
+                        </Accordion.ItemIndicator>
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <ul>
-                            <li>
-                                I only accept payment payment via Paypal
-                                invoices.
-                            </li>
-                            <li>Payment is in USD.</li>
+                            <li>I only accept payment via Paypal invoices.</li>
+                            <li>Payment is in USD (US Dollar).</li>
                             <li>
                                 A proper reference or visual representation of
-                                your character must be provided.
+                                your character must be provided. I will not draw
+                                based on solely text description, nor design
+                                your character from scratch.
                             </li>
                             <li>
                                 I only accept references in either PNG or JPEG
@@ -137,7 +152,8 @@ export default function Page() {
                                 aesthetic.
                             </li>
                             <li>
-                                I will draw your character in 3 or 4-digit paws.
+                                I will draw your character in 3-digit footpaws
+                                and 3 or 4-digit handpaws.
                             </li>
                         </ul>
                     </Accordion.ItemContent>

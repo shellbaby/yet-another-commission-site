@@ -1,27 +1,31 @@
 import { Field as ArkField } from "@ark-ui/react/field"
 import { ReactNode } from "react"
 
-interface RootProps extends ArkField.RootProps {}
-export const Field = (props: RootProps) => {
-    return <ArkField.Root {...props} />
-}
-Field.Root = Field
+export const Field = () => ArkField
 
 interface LabelProps extends ArkField.LabelProps {}
 const Label = (props: LabelProps) => {
-    return <ArkField.Label {...props} />
+    const { children, ...others } = props
+    return (
+        <ArkField.Label {...others}>
+            {children}
+            <ArkField.RequiredIndicator>Required</ArkField.RequiredIndicator>
+        </ArkField.Label>
+    )
 }
 Field.Label = Label
 
 interface InputProps extends ArkField.InputProps {
-    iconStart?: ReactNode
+    addon?: string | ReactNode
 }
 const Input = (props: InputProps) => {
-    const { iconStart, ...others } = props
-    return iconStart ? (
-        <div data-sub-scope="">
-            <span>icon</span>
-            <ArkField.Input data-style="icon" />
+    const { addon, ...others } = props
+    return addon ? (
+        <div data-scope="field" data-part="input-inline-container">
+            <ArkField.Label data-scope="field" data-part="input-inline-addon">
+                {addon}
+            </ArkField.Label>
+            <ArkField.Input {...others} data-variant={"inline"} />
         </div>
     ) : (
         <ArkField.Input {...others} />
@@ -29,14 +33,11 @@ const Input = (props: InputProps) => {
 }
 Field.Input = Input
 
-interface HelperTextProps extends ArkField.HelperTextProps {}
-const HelperText = (props: HelperTextProps) => {
-    return <ArkField.HelperText {...props} />
-}
-Field.HelperText = HelperText
-
-interface ErrorTextProps extends ArkField.ErrorTextProps {}
-const ErrorText = (props: ErrorTextProps) => {
-    return <ArkField.ErrorText {...props} />
-}
-Field.ErrorText = ErrorText
+Field.Root = ArkField.Root
+Field.ErrorText = ArkField.ErrorText
+Field.HelperText = ArkField.HelperText
+Field.Context = ArkField.Context
+Field.RequiredIndicator = ArkField.RequiredIndicator
+Field.RootProvider = ArkField.RootProvider
+Field.Select = ArkField.Select
+Field.Textarea = ArkField.Textarea
