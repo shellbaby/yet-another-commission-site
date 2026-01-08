@@ -1,12 +1,16 @@
 "use client"
 
 import { Accordion } from "@/components"
-import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
+import {
+    ArrowDown01Icon,
+    CancelCircleIcon,
+    CheckmarkCircle02Icon,
+} from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 
 export default function Page() {
     return (
-        <div>
+        <>
             <h2 className="my-12 text-center">Terms of Service</h2>
             <Accordion.Root defaultValue={["general"]}>
                 <Accordion.Item value="general">
@@ -103,12 +107,18 @@ export default function Page() {
                         </Accordion.ItemIndicator>
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
-                        <h6>I will draw</h6>
+                        <h6 className="text-success flex items-center gap-2">
+                            I will draw{" "}
+                            <HugeiconsIcon icon={CheckmarkCircle02Icon} />
+                        </h6>
                         <ul className="mt-2">
                             <li>SFW</li>
                             <li>Furry or Anthropomorphic Characters</li>
                         </ul>
-                        <h6 className="mt-4">I will NOT draw</h6>
+                        <h6 className="text-error mt-6 flex items-center gap-2">
+                            I will NOT draw{" "}
+                            <HugeiconsIcon icon={CancelCircleIcon} />
+                        </h6>
                         <ul className="mt-2">
                             <li>NSFW (not here)</li>
                             <li>Human</li>
@@ -159,6 +169,6 @@ export default function Page() {
                     </Accordion.ItemContent>
                 </Accordion.Item>
             </Accordion.Root>
-        </div>
+        </>
     )
 }

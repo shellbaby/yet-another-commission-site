@@ -4,12 +4,13 @@
     --padding: var(--p-block) var(--p-inline);
 
     &[data-part="root"] {
-        border: 1px solid black;
-        border-radius: var(--radius-md);
+        border: 2px solid var(--color-separator);
+        border-radius: var(--radius-default);
     }
 
     &[data-part="item"] {
-        border-top-width: 1px;
+        border-top-width: 2px;
+        border-color: var(--color-separator);
         &:is(:first-child) {
             border-top-width: 0;
         }
@@ -20,7 +21,7 @@
         display: flex;
         cursor: pointer;
         font-weight: var(--font-weight-bold);
-        font-size: var(--text-h6);
+        font-size: var(--text-h5);
         width: 100%;
         justify-content: space-between;
     }

@@ -1,15 +1,14 @@
 [data-scope="button"] {
     --height: 40px;
-    --border-radius: 0.75rem;
     --padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-    --color: purple;
+    --color: var(--color-primary);
     --width: auto;
 
     &[data-part="root"] {
         height: var(--height);
         width: var(--width);
         border: 2px solid var(--color);
-        border-radius: var(--border-radius);
+        border-radius: var(--radius-default);
         padding: var(--padding);
         cursor: pointer;
         color: var(--color);
@@ -18,9 +17,13 @@
         justify-content: center;
         font-weight: bold;
 
-        &:hover {
+        &:is(:hover, :focus-visible) {
             background: var(--color);
-            color: white;
+            color: var(--color-white);
+        }
+
+        &:focus-visible {
+            outline: none;
         }
     }
 }

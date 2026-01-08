@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-:root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --radius-full: 9999px;
-}
-
 @theme {
     --text-h1: 2.986rem;
     --text-h2: 2.488rem;
@@ -19,18 +13,70 @@
     --color-bluesky: #006aff;
     --color-twitch: #9147ff;
     --color-kofi: #ff5a16;
+
+    /* https://lospec.com/palette-list/mulfok32 */
+    --color-mulfok32-1: #5ba675;
+    --color-mulfok32-2: #6bc96c;
+    --color-mulfok32-3: #abdd64;
+    --color-mulfok32-4: #fcef8d;
+    --color-mulfok32-5: #ffb879;
+
+    --color-mulfok32-6: #ea6262;
+    --color-mulfok32-7: #cc425e;
+    --color-mulfok32-8: #a32858;
+    --color-mulfok32-9: #751756;
+    --color-mulfok32-10: #390947;
+
+    --color-mulfok32-11: #611851;
+    --color-mulfok32-12: #873555;
+    --color-mulfok32-13: #a6555f;
+    --color-mulfok32-14: #c97373;
+    --color-mulfok32-15: #f2ae99;
+
+    --color-mulfok32-16: #ffc3f2;
+    --color-mulfok32-17: #ee8fcb;
+    --color-mulfok32-18: #d46eb3;
+    --color-mulfok32-19: #873e84;
+    --color-mulfok32-20: #1f102a;
+
+    --color-mulfok32-21: #4a3052;
+    --color-mulfok32-22: #7b5480;
+    --color-mulfok32-23: #a6859f;
+    --color-mulfok32-24: #d9bdc8;
+    --color-mulfok32-25: #ffffff; /* OG White */
+
+    --color-mulfok32-26: #aee2ff;
+    --color-mulfok32-27: #8db7ff;
+    --color-mulfok32-28: #6d80fa;
+    --color-mulfok32-29: #8465ec;
+    --color-mulfok32-30: #834dc4;
+
+    --color-mulfok32-31: #7d2da0;
+    --color-mulfok32-32: #4e187c;
+
+    --color-mulfok32-25-mod: #fff1e8; /* White */
+
+    --line-height: calc(2px + 2ex + 2px);
 }
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
+    --color-white: var(--color-mulfok32-25-mod);
+    --color-black: var(--color-mulfok32-21);
+    --color-black-muted: var(--color-mulfok32-23);
+    --color-primary: var(--color-mulfok32-19);
+    --color-separator: var(--color-black-muted);
+    --color-success: var(--color-mulfok32-1);
+    --color-error: var(--color-mulfok32-6);
+    --color-highlight: var(--color-mulfok32-15);
+
+    --radius-default: var(--radius-md);
+
+    --shadow-default: var(--shadow-md);
 }
 
 body {
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--color-white);
+    color: var(--color-black);
 
     max-width: var(--breakpoint-md);
     margin: 0 auto;
@@ -42,12 +88,12 @@ h3,
 h4,
 h5,
 h6 {
-    line-height: calc(2px + 2ex + 2px);
+    line-height: var(--line-height);
     font-weight: var(--font-weight-bold);
 }
 
 p {
-    line-height: calc(2px + 2ex + 2px);
+    line-height: var(--line-height);
 }
 
 h1 {
@@ -86,4 +132,8 @@ ul {
             margin-top: 0;
         }
     }
+}
+
+hr {
+    @apply border-separator border;
 }

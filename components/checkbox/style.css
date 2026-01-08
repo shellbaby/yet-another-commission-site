@@ -8,7 +8,7 @@
     &[data-part="control"] {
         --size: calc(var(--spacing) * 6);
 
-        border: 1px solid black;
+        border: 1px solid var(--color-black-muted);
         border-radius: var(--radius-sm);
         aspect-ratio: 1;
         width: var(--size);
@@ -19,8 +19,14 @@
         cursor: pointer;
 
         &:is(:checked, [data-state="checked"]) {
-            background: purple;
-            border-color: purple;
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        &:is([data-focus-visible]) {
+            border-color: var(--color-primary);
+            outline: 2px solid var(--color-primary);
+            outline-offset: 1px;
         }
     }
 }

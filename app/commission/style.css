@@ -11,17 +11,9 @@
 
 #commission-description {
     margin-top: calc(var(--spacing) * 3);
-    & > li {
-        list-style: inside square;
-        margin-top: calc(var(--spacing) * 1);
-
-        &:first-child {
-            margin-top: 0;
-        }
-    }
 }
 
 #commission-request {
     grid-column: span 2 / span 2;
-    margin-top: calc(var(--spacing) * 6);
+    margin-top: calc(var(--spacing) * 9);
 }

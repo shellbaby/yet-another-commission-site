@@ -6,13 +6,13 @@ export default function Page() {
             <div>
                 <h5 className="text-center">Contact me through...</h5>
                 <div className="mt-4 flex flex-col gap-2">
-                    <a href="">
+                    <a href="https://t.me/littlelambyderg">
                         <Button color="var(--color-telegram)" width="full">
                             Telegram
                         </Button>
                     </a>
 
-                    <a href="">
+                    <a href="https://discord.com/users/845590906543407104">
                         <Button color="var(--color-discord)" width="full">
                             Discord
                         </Button>
@@ -27,7 +27,7 @@ export default function Page() {
             </div>
             <div>
                 <h5 className="text-center">...or through this form</h5>
-                <div className="mt-4 rounded-md border-2 p-6">
+                <div className="border-separator mt-4 rounded-md border-2 p-6">
                     <form className="flex flex-col gap-6">
                         <Field.Root required>
                             <Field.Label>Name</Field.Label>

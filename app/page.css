@@ -1,11 +1,14 @@
-:root {
-    --page-root-width: 50rem;
-    --page-root-padding-inline: 3rem;
-    --page-root-padding-block: 3rem; 
-}
+#home-slot {
+    margin-top: calc(var(--spacing) * 12);
+    &:first-child {
+        margin-top: 0;
+    }
 
-#main {
-    width: var(--page-root-width);
-    padding: var(--page-root-padding-block) var(--page-root-padding-inline);
-    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 3);
+
+    & p {
+        text-indent: calc(var(--spacing) * 6);
+    }
 }

@@ -7,8 +7,8 @@
     }
 
     &[data-part="content"] {
-        background: white;
-        box-shadow: var(--shadow-md);
+        background: var(--color-white);
+        box-shadow: var(--shadow-default);
         display: flex;
         flex-direction: column;
     }

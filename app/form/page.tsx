@@ -15,6 +15,7 @@ import {
     UnfoldMoreIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useSearchParams } from "next/navigation"
 import "./style.css"
 
 export default function Page() {
@@ -26,6 +27,9 @@ export default function Page() {
             { label: "Reference Sheet ($75)", value: "ref-sheet" },
         ],
     })
+
+    const searchParams = useSearchParams()
+    const commType = searchParams.get("type")
 
     const fileUploadValidate = (
         file: File,
@@ -41,15 +45,15 @@ export default function Page() {
     }
 
     return (
-        <div>
+        <>
             <h2 className="my-12 text-center">Commission Form</h2>
-            <form className="rounded-md border p-6">
+            <form className="rounded-default border-separator border-2 p-9">
                 <div id="form-slot">
                     <div>
                         <h5>Personal Info</h5>
                     </div>
                     <div id="form-group">
-                        <Field.Root required className="col-span-4">
+                        <Field.Root required>
                             <Field.Label>Your name</Field.Label>
                             <Field.Input placeholder="Name / Nickname" />
                             <Field.ErrorText>
@@ -57,7 +61,7 @@ export default function Page() {
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Field.Root required className="col-span-4">
+                        <Field.Root required>
                             <Field.Label>Email</Field.Label>
                             <Field.Input
                                 type="email"
@@ -68,15 +72,21 @@ export default function Page() {
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Fieldset.Root className="col-span-4">
+                        <Fieldset.Root>
                             <Fieldset.Legend>Other Contacts</Fieldset.Legend>
                             <div className="mt-1 flex flex-col gap-3">
                                 <Field.Root>
-                                    <Field.Input addon="Telegram" />
+                                    <Field.Input
+                                        addon="Telegram"
+                                        placeholder="t.me/username"
+                                    />
                                 </Field.Root>
 
                                 <Field.Root>
-                                    <Field.Input addon="Discord" />
+                                    <Field.Input
+                                        addon="Discord"
+                                        placeholder="Username"
+                                    />
                                 </Field.Root>
                             </div>
                         </Fieldset.Root>
@@ -88,8 +98,11 @@ export default function Page() {
                         <h5>Commission Info</h5>
                     </div>
                     <div id="form-group">
-                        <Field.Root className="col-span-4" required>
-                            <Select.Root collection={commTypes}>
+                        <Field.Root required>
+                            <Select.Root
+                                collection={commTypes}
+                                value={commType ? [commType] : []}
+                            >
                                 <Select.Label>
                                     Commission Type
                                     <Field.RequiredIndicator>
@@ -103,6 +116,7 @@ export default function Page() {
                                             <HugeiconsIcon
                                                 icon={UnfoldMoreIcon}
                                                 size={16}
+                                                color="var(--color-black-muted)"
                                             />
                                         </Select.Indicator>
                                     </Select.Trigger>
@@ -133,7 +147,7 @@ export default function Page() {
                             </Select.Root>
                         </Field.Root>
 
-                        <Field.Root className="col-span-4" required>
+                        <Field.Root required>
                             <Field.Label>Commission Idea</Field.Label>
                             <Field.Textarea autoresize />
                             <Field.ErrorText>
@@ -141,7 +155,7 @@ export default function Page() {
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Field.Root className="col-span-4" required>
+                        <Field.Root required>
                             <FileUpload.Root
                                 maxFiles={5}
                                 maxFileSize={1024 * 1024 * 5}
@@ -149,7 +163,7 @@ export default function Page() {
                                 validate={fileUploadValidate}
                             >
                                 <FileUpload.Label>
-                                    Reference Sheet
+                                    Reference Sheet / Visual Depiction
                                     <Field.RequiredIndicator>
                                         Required
                                     </Field.RequiredIndicator>
@@ -157,10 +171,11 @@ export default function Page() {
                                 <FileUpload.Dropzone>
                                     <div className="text-center text-sm [&>span]:block">
                                         <span>
-                                            Drop Your Reference Sheet Here
+                                            Drop your reference sheet here
                                         </span>
                                         <span className="mt-1">
-                                            Max. 5MB, only png/jpeg
+                                            Max. 5MB, max. 5 files, and only
+                                            png/jpeg
                                         </span>
                                     </div>
                                     <FileUpload.Trigger asChild>
@@ -192,13 +207,20 @@ export default function Page() {
                                     </FileUpload.Context>
                                 </FileUpload.ItemGroup>
                                 <FileUpload.ClearTrigger asChild>
-                                    <Button>Clear all files</Button>
+                                    <Button color="var(--color-error)">
+                                        Clear all files
+                                    </Button>
                                 </FileUpload.ClearTrigger>
                                 <FileUpload.HiddenInput />
                             </FileUpload.Root>
                             <Field.ErrorText>
                                 --Error-based text--
                             </Field.ErrorText>
+                        </Field.Root>
+
+                        <Field.Root>
+                            <Field.Label>Additional Notes</Field.Label>
+                            <Field.Textarea autoresize />
                         </Field.Root>
                     </div>
                 </div>
@@ -249,6 +271,6 @@ export default function Page() {
                     </div>
                 </div>
             </form>
-        </div>
+        </>
     )
 }

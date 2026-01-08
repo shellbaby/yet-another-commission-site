@@ -28,15 +28,15 @@ export default function RootLayout({
     return (
         <html lang="en" className={AnonymicePro.className}>
             <body>
-                <header className="mt-4">
+                <header className="my-4">
                     <Navigation />
                 </header>
 
-                <span className="mt-4 block h-1 w-full bg-red-400" />
+                <hr />
 
-                {children}
+                <div className="mt-12">{children}</div>
 
-                <div className="my-8 text-center">
+                <div className="my-12 text-center">
                     <small>
                         Copyright  2025 shellbaby. All Rights Reserved.
                     </small>

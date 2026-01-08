@@ -19,7 +19,7 @@ export const Navigation = () => {
                     </Popover.Trigger>
 
                     <Popover.Positioner>
-                        <Popover.Content className="border [&>a]:px-4 [&>a]:py-2 [&>a:hover]:bg-gray-700 [&>a:hover]:text-white">
+                        <Popover.Content className="[&>a:hover]:bg-primary border-border rounded-default overflow-hidden border [&>a]:px-4 [&>a]:py-2 [&>a:hover]:text-white">
                             <Link href={"/commission"}>prices</Link>
                             <Link href={"/tos"}>terms of service</Link>
                             <Link href={"/form"}>commission form</Link>

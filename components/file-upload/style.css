@@ -25,9 +25,14 @@
         gap: var(--dropzone-gap);
         min-height: var(--min-height);
         padding: var(--p-block) var(--p-inline);
-        border: 1px solid black;
+        border: 1px solid var(--color-black-muted);
         border-radius: var(--radius-md);
         cursor: pointer;
+
+        &:focus-visible {
+            border-color: var(--color-primary);
+            outline: 2px solid var(--color-primary);
+        }
     }
 
     &[data-part="item"] {
@@ -36,7 +41,7 @@
         grid-template-areas: "preview name delete" "preview size delete";
         grid-template-columns: auto 1fr auto;
         padding: var(--p-block) var(--p-inline);
-        border: 1px solid black;
+        border: 1px solid var(--color-black-muted);
         border-radius: var(--radius-md);
     }
 
