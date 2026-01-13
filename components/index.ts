@@ -1,7 +1,11 @@
 import { Accordion } from "@ark-ui/react/accordion"
 import { Checkbox } from "@ark-ui/react/checkbox"
 import { Fieldset } from "@ark-ui/react/fieldset"
-import { FileUpload, useFileUpload } from "@ark-ui/react/file-upload"
+import {
+    FileUpload,
+    useFileUpload,
+    type FileUploadFileError,
+} from "@ark-ui/react/file-upload"
 import { Portal } from "@ark-ui/react/portal"
 import { createListCollection, Select } from "@ark-ui/react/select"
 import { Button } from "./button/button"
@@ -17,6 +21,7 @@ export {
     Field,
     Fieldset,
     FileUpload,
+    FileUploadFileError,
     Mark,
     Navigation,
     Popover,

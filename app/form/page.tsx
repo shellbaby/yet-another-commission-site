@@ -7,7 +7,9 @@ import {
     Field,
     Fieldset,
     FileUpload,
+    FileUploadFileError,
     Select,
+    useFileUpload,
 } from "@/components"
 import {
     Cancel01Icon,
@@ -16,59 +18,136 @@ import {
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useSearchParams } from "next/navigation"
+import { Controller, useForm } from "react-hook-form"
 import "./style.css"
 
 export default function Page() {
+    enum CommissionType {
+        emote = "emote",
+        "half-body" = "half-body",
+        "full-body" = "full-body",
+        "ref-sheet" = "ref-sheet",
+    }
+
     const commTypes = createListCollection({
         items: [
-            { label: "Emote ($15)", value: "emote" },
-            { label: "Half Body ($25)", value: "half-body" },
-            { label: "Full Body ($35)", value: "full-body" },
-            { label: "Reference Sheet ($75)", value: "ref-sheet" },
+            { label: "Emote ($15)", value: CommissionType.emote },
+            { label: "Half Body ($25)", value: CommissionType["half-body"] },
+            { label: "Full Body ($35)", value: CommissionType["full-body"] },
+            {
+                label: "Reference Sheet ($75)",
+                value: CommissionType["ref-sheet"],
+            },
         ],
     })
 
     const searchParams = useSearchParams()
     const commType = searchParams.get("type")
 
+    interface FormValues {
+        name: string
+        email: string
+        telegram: string
+        discord: string
+        commType: CommissionType
+        idea: string
+        ref: FileList
+        notes: string
+        tosAgreement?: string
+        noReserveAgreement?: string
+    }
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        control,
+        setError,
+    } = useForm<FormValues>()
+
+    const formOnSubmit = handleSubmit((data: FormValues) => {
+        console.log(data)
+    })
+
+    const fileUploadErrorMessage: Record<FileUploadFileError, string> = {
+        FILE_EXISTS: "File already exists",
+        FILE_TOO_LARGE: "File size is too large (max. 5MB)",
+        TOO_MANY_FILES: "Maximum 5 files are allowed",
+        FILE_INVALID: "",
+        FILE_INVALID_TYPE: "",
+        FILE_TOO_SMALL: "",
+        REQUIRED: "Please provide at least one reference sheet",
+    }
+
+    const _MAX_FILE_SIZE = 1024 * 1024 * 5
     const fileUploadValidate = (
         file: File,
         details: FileUpload.FileValidateDetails
     ): FileUpload.FileError[] | null => {
+        console.log("file validate run")
         if (
             details.acceptedFiles.find(
                 (acceptFile) => acceptFile.name === file.name
             )
-        )
+        ) {
             return ["FILE_EXISTS"]
+        }
+
+        if (details.acceptedFiles.length >= 5) {
+            return ["TOO_MANY_FILES"]
+        }
+
+        if (file.size > _MAX_FILE_SIZE) {
+            return ["FILE_TOO_LARGE"]
+        }
+
         return null
     }
+
+    const fileUploadContext = useFileUpload({
+        validate: fileUploadValidate,
+        maxFiles: 5,
+        maxFileSize: _MAX_FILE_SIZE,
+        accept: "image/png,image/jpeg",
+    })
 
     return (
         <>
             <h2 className="my-12 text-center">Commission Form</h2>
-            <form className="rounded-default border-separator border-2 p-9">
+            <form
+                className="rounded-default border-separator border-2 p-9"
+                onSubmit={formOnSubmit}
+            >
                 <div id="form-slot">
                     <div>
                         <h5>Personal Info</h5>
                     </div>
                     <div id="form-group">
-                        <Field.Root required>
+                        <Field.Root invalid={!!errors.name}>
                             <Field.Label>Your name</Field.Label>
-                            <Field.Input placeholder="Name / Nickname" />
+                            <Field.Input
+                                placeholder="Name / Nickname"
+                                {...register("name", {
+                                    required:
+                                        "Please fill out your name/nickname",
+                                })}
+                            />
                             <Field.ErrorText>
-                                Please fill out your name
+                                {errors.name?.message}
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Field.Root required>
+                        <Field.Root invalid={!!errors.email}>
                             <Field.Label>Email</Field.Label>
                             <Field.Input
                                 type="email"
                                 placeholder="your@email.com"
+                                {...register("email", {
+                                    required: "Please fill out your email",
+                                })}
                             />
                             <Field.ErrorText>
-                                Please fill out your email
+                                {errors.email?.message}
                             </Field.ErrorText>
                         </Field.Root>
 
@@ -79,6 +158,7 @@ export default function Page() {
                                     <Field.Input
                                         addon="Telegram"
                                         placeholder="t.me/username"
+                                        {...register("telegram")}
                                     />
                                 </Field.Root>
 
@@ -86,6 +166,7 @@ export default function Page() {
                                     <Field.Input
                                         addon="Discord"
                                         placeholder="Username"
+                                        {...register("discord")}
                                     />
                                 </Field.Root>
                             </div>
@@ -98,77 +179,101 @@ export default function Page() {
                         <h5>Commission Info</h5>
                     </div>
                     <div id="form-group">
-                        <Field.Root required>
-                            <Select.Root
-                                collection={commTypes}
-                                value={commType ? [commType] : []}
-                            >
-                                <Select.Label>
-                                    Commission Type
-                                    <Field.RequiredIndicator>
-                                        Required
-                                    </Field.RequiredIndicator>
-                                </Select.Label>
-                                <Select.Control>
-                                    <Select.Trigger>
-                                        <Select.ValueText placeholder="Select a Commission Type" />
-                                        <Select.Indicator>
-                                            <HugeiconsIcon
-                                                icon={UnfoldMoreIcon}
-                                                size={16}
-                                                color="var(--color-black-muted)"
-                                            />
-                                        </Select.Indicator>
-                                    </Select.Trigger>
-                                </Select.Control>
-
-                                <Select.Positioner>
-                                    <Select.Content>
-                                        {commTypes.items.map((item) => (
-                                            <Select.Item
-                                                key={item.value}
-                                                item={item}
-                                            >
-                                                <Select.ItemText>
-                                                    {item.label}
-                                                </Select.ItemText>
-                                                <Select.ItemIndicator>
+                        <Controller
+                            name="commType"
+                            control={control}
+                            rules={{
+                                required: "Please select a commission type",
+                            }}
+                            render={({
+                                field: { name, value, ref, onBlur, onChange },
+                                fieldState: { invalid, error },
+                            }) => (
+                                <Field.Root invalid={invalid}>
+                                    <Select.Root
+                                        name={name}
+                                        collection={commTypes}
+                                        value={value ? [value] : []}
+                                        onValueChange={(e) =>
+                                            onChange(e.value[0])
+                                        }
+                                        onInteractOutside={onBlur}
+                                    >
+                                        <Select.Label>
+                                            Commission Type
+                                            <Field.RequiredIndicator>
+                                                Required
+                                            </Field.RequiredIndicator>
+                                        </Select.Label>
+                                        <Select.Control>
+                                            <Select.Trigger ref={ref}>
+                                                <Select.ValueText placeholder="Select a Commission Type" />
+                                                <Select.Indicator>
                                                     <HugeiconsIcon
-                                                        icon={Tick02Icon}
+                                                        icon={UnfoldMoreIcon}
                                                         size={16}
+                                                        color="var(--color-black-muted)"
                                                     />
-                                                </Select.ItemIndicator>
-                                            </Select.Item>
-                                        ))}
-                                    </Select.Content>
-                                </Select.Positioner>
+                                                </Select.Indicator>
+                                            </Select.Trigger>
+                                        </Select.Control>
 
-                                <Select.HiddenSelect />
-                            </Select.Root>
-                        </Field.Root>
+                                        <Select.Positioner>
+                                            <Select.Content>
+                                                {commTypes.items.map((item) => (
+                                                    <Select.Item
+                                                        key={item.value}
+                                                        item={item}
+                                                    >
+                                                        <Select.ItemText>
+                                                            {item.label}
+                                                        </Select.ItemText>
+                                                        <Select.ItemIndicator>
+                                                            <HugeiconsIcon
+                                                                icon={
+                                                                    Tick02Icon
+                                                                }
+                                                                size={16}
+                                                            />
+                                                        </Select.ItemIndicator>
+                                                    </Select.Item>
+                                                ))}
+                                            </Select.Content>
+                                        </Select.Positioner>
+                                        <Select.HiddenSelect />
+                                    </Select.Root>
+                                    <Field.ErrorText>
+                                        {error?.message}
+                                    </Field.ErrorText>
+                                </Field.Root>
+                            )}
+                        />
 
-                        <Field.Root required>
+                        <Field.Root invalid={!!errors.idea}>
                             <Field.Label>Commission Idea</Field.Label>
-                            <Field.Textarea autoresize />
+                            <Field.Textarea
+                                autoresize
+                                {...register("idea", {
+                                    required:
+                                        "Please provide the idea for your commission",
+                                })}
+                            />
                             <Field.ErrorText>
-                                Please provide the idea for your commission
+                                {errors.idea?.message}
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Field.Root required>
-                            <FileUpload.Root
-                                maxFiles={5}
-                                maxFileSize={1024 * 1024 * 5}
-                                accept={"image/png,image/jpeg"}
-                                validate={fileUploadValidate}
-                            >
+                        <Field.Root invalid={!!errors.ref}>
+                            <FileUpload.RootProvider value={fileUploadContext}>
                                 <FileUpload.Label>
                                     Reference Sheet / Visual Depiction
                                     <Field.RequiredIndicator>
                                         Required
                                     </Field.RequiredIndicator>
                                 </FileUpload.Label>
-                                <FileUpload.Dropzone>
+                                <FileUpload.Dropzone
+                                    data-invalid={!!errors.ref ? "" : null}
+                                >
                                     <div className="text-center text-sm [&>span]:block">
                                         <span>
                                             Drop your reference sheet here
@@ -206,64 +311,183 @@ export default function Page() {
                                         }
                                     </FileUpload.Context>
                                 </FileUpload.ItemGroup>
+
+                                <FileUpload.ItemGroup>
+                                    <div
+                                        className="flex justify-end"
+                                        style={{
+                                            display: !!fileUploadContext
+                                                .rejectedFiles.length
+                                                ? "flex"
+                                                : "none",
+                                        }}
+                                    >
+                                        <button
+                                            className="cursor-pointer"
+                                            onClick={
+                                                fileUploadContext.clearRejectedFiles
+                                            }
+                                            type="button"
+                                        >
+                                            Clear all errors
+                                        </button>
+                                    </div>
+                                    <FileUpload.Context>
+                                        {({ rejectedFiles }) =>
+                                            rejectedFiles.map((rejected) => (
+                                                <FileUpload.Item
+                                                    key={rejected.file.name}
+                                                    file={rejected.file}
+                                                    data-variant="error"
+                                                >
+                                                    <FileUpload.ItemPreview type="image/*">
+                                                        <FileUpload.ItemPreviewImage />
+                                                    </FileUpload.ItemPreview>
+                                                    <FileUpload.ItemName />
+                                                    <FileUpload.ItemSizeText />
+                                                    <div className="text-error col-span-full mt-3">
+                                                        <strong>Errors</strong>
+                                                        <ul>
+                                                            {rejected.errors.map(
+                                                                (
+                                                                    error,
+                                                                    index
+                                                                ) => (
+                                                                    <li
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            fileUploadErrorMessage[
+                                                                                error
+                                                                            ]
+                                                                        }
+                                                                    </li>
+                                                                )
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                </FileUpload.Item>
+                                            ))
+                                        }
+                                    </FileUpload.Context>
+                                </FileUpload.ItemGroup>
                                 <FileUpload.ClearTrigger asChild>
-                                    <Button color="var(--color-error)">
+                                    <Button
+                                        color="var(--color-error)"
+                                        className="mt-6"
+                                        width="full"
+                                    >
                                         Clear all files
                                     </Button>
                                 </FileUpload.ClearTrigger>
-                                <FileUpload.HiddenInput />
-                            </FileUpload.Root>
+                                <FileUpload.HiddenInput
+                                    {...register("ref", {
+                                        required:
+                                            "Please provide at least one reference sheet",
+                                    })}
+                                />
+                            </FileUpload.RootProvider>
                             <Field.ErrorText>
-                                --Error-based text--
+                                {errors.ref?.message}
                             </Field.ErrorText>
                         </Field.Root>
 
                         <Field.Root>
                             <Field.Label>Additional Notes</Field.Label>
-                            <Field.Textarea autoresize />
+                            <Field.Textarea autoresize {...register("notes")} />
                         </Field.Root>
                     </div>
                 </div>
 
                 <div id="form-slot">
                     <div id="form-group" className="col-span-full!">
-                        <Field.Root className="col-span-full mt-2">
-                            <Checkbox.Root>
-                                <Checkbox.Control>
-                                    <Checkbox.Indicator>
-                                        <HugeiconsIcon
-                                            icon={Tick02Icon}
-                                            size={16}
-                                        />
-                                    </Checkbox.Indicator>
-                                </Checkbox.Control>
-                                <Checkbox.Label>
-                                    I have read and agreed to the Terms of
-                                    Service
-                                </Checkbox.Label>
-                                <Checkbox.HiddenInput />
-                            </Checkbox.Root>
-                        </Field.Root>
+                        <Controller
+                            name="tosAgreement"
+                            control={control}
+                            rules={{ required: "Please read and agree to ToS" }}
+                            render={({
+                                field: { name, ref, value, onBlur, onChange },
+                                fieldState: { invalid, error },
+                            }) => (
+                                <Field.Root
+                                    className="col-span-full mt-2"
+                                    invalid={invalid}
+                                >
+                                    <Checkbox.Root
+                                        name={name}
+                                        value={value}
+                                        onCheckedChange={(e) =>
+                                            onChange(e.checked)
+                                        }
+                                        onBlur={onBlur}
+                                    >
+                                        <Checkbox.Control ref={ref}>
+                                            <Checkbox.Indicator>
+                                                <HugeiconsIcon
+                                                    icon={Tick02Icon}
+                                                    size={16}
+                                                />
+                                            </Checkbox.Indicator>
+                                        </Checkbox.Control>
+                                        <Checkbox.Label>
+                                            I have read and agreed to the Terms
+                                            of Service
+                                        </Checkbox.Label>
+                                        <Checkbox.HiddenInput />
+                                    </Checkbox.Root>
+                                    <Field.ErrorText>
+                                        {error?.message}
+                                    </Field.ErrorText>
+                                </Field.Root>
+                            )}
+                        />
 
-                        <Field.Root className="col-span-full mt-2">
-                            <Checkbox.Root>
-                                <Checkbox.Control>
-                                    <Checkbox.Indicator>
-                                        <HugeiconsIcon
-                                            icon={Tick02Icon}
-                                            size={16}
-                                        />
-                                    </Checkbox.Indicator>
-                                </Checkbox.Control>
-                                <Checkbox.Label>
-                                    I agree that this form is not a way to
-                                    reserve commission slot, and the artist has
-                                    all rights to accept or decline it at their
-                                    discretion
-                                </Checkbox.Label>
-                                <Checkbox.HiddenInput />
-                            </Checkbox.Root>
-                        </Field.Root>
+                        <Controller
+                            name="noReserveAgreement"
+                            control={control}
+                            rules={{
+                                required: "Please agree to the above term",
+                            }}
+                            render={({
+                                field: { name, value, ref, onBlur, onChange },
+                                fieldState: { invalid, error },
+                            }) => (
+                                <Field.Root
+                                    className="col-span-full mt-2"
+                                    invalid={invalid}
+                                >
+                                    <Checkbox.Root
+                                        name={name}
+                                        value={value}
+                                        onCheckedChange={(e) =>
+                                            onChange(e.checked)
+                                        }
+                                        onBlur={onBlur}
+                                    >
+                                        <Checkbox.Control ref={ref}>
+                                            <Checkbox.Indicator>
+                                                <HugeiconsIcon
+                                                    icon={Tick02Icon}
+                                                    size={16}
+                                                />
+                                            </Checkbox.Indicator>
+                                        </Checkbox.Control>
+                                        <Checkbox.Label>
+                                            I agree that this form is not a way
+                                            to reserve commission slot, and the
+                                            artist has all rights to accept or
+                                            decline it at their discretion
+                                        </Checkbox.Label>
+                                        <Checkbox.HiddenInput />
+                                    </Checkbox.Root>
+                                    <Field.ErrorText>
+                                        {error?.message}
+                                    </Field.ErrorText>
+                                </Field.Root>
+                            )}
+                        />
 
                         <div className="col-span-full flex justify-end">
                             <Button type="submit">Send</Button>

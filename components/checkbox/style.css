@@ -1,7 +1,7 @@
 [data-scope="checkbox"] {
     &[data-part="root"] {
         display: flex;
-        gap: calc(var(--spacing) * 2);
+        gap: calc(var(--spacing) * 3);
         align-items: flex-start;
     }
 
