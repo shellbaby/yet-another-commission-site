@@ -84,4 +84,10 @@
         font-size: var(--text-sm);
         margin-top: var(--gap);
     }
+
+    &[data-part="helper-text"] {
+        font-size: var(--text-sm);
+        margin-top: var(--gap);
+        color: var(--color-black-muted);
+    }
 }

@@ -1,5 +1,6 @@
 import "./accordion/style.css"
 import "./button/style.css"
+import "./carousel/style.css"
 import "./checkbox/style.css"
 import "./field/style.css"
 import "./fieldset/style.css"

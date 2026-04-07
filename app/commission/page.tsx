@@ -1,8 +1,66 @@
-import { Button } from "@/components"
+import { Button, Carousel, CarouselImage } from "@/components"
 import Link from "next/link"
 import "./style.css"
 
 export default function Page() {
+    const IMAGE_SIZE = 256
+
+    const emotes: CarouselImage[] = [
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/f40bfded-cfc4-4e09-8925-1cb29d1b2653_cheesed.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/966af088-7cfc-4854-8c70-f008ee601bdf_cry.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/884b1f93-20db-4b5e-bc54-a16d5ddc65b2_ded.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/9f39290e-e3ca-4834-916d-cccdbf4ab875_eepy.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/33fe1175-ed0c-4049-8198-37093b86312a_fu.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/2d41d462-4588-432d-bb4e-bd9f6a01fda1_hell.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/98d28c06-0be4-4e82-9608-4591030324be_hngh.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+
+        {
+            src: "https://storage.ko-fi.com/cdn/useruploads/post/22923a40-6de5-4f91-82a4-a078a683b378_looker.png",
+            height: IMAGE_SIZE,
+            width: IMAGE_SIZE,
+        },
+    ]
+
+    const half_body: CarouselImage[] = []
+
+    const full_body: CarouselImage[] = []
+
+    const ref_sheet: CarouselImage[] = []
+
     return (
         <>
             <div className="my-12 text-center">
@@ -31,7 +89,9 @@ export default function Page() {
                         <li>Free Light-mode Version</li>
                     </ul>
                 </div>
-                <div>image</div>
+                <div id="section-carousel">
+                    <Carousel.Default images={emotes} autoSize spacing="2rem" />
+                </div>
                 <div id="commission-request">
                     <Link
                         href={{

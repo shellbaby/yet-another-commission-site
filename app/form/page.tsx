@@ -42,7 +42,7 @@ export default function Page() {
     })
 
     const searchParams = useSearchParams()
-    const commType = searchParams.get("type")
+    const defaultCommType = searchParams.get("type")
 
     interface FormValues {
         name: string
@@ -62,8 +62,12 @@ export default function Page() {
         handleSubmit,
         formState: { errors },
         control,
-        setError,
-    } = useForm<FormValues>()
+    } = useForm<FormValues>({
+        defaultValues: {
+            commType:
+                CommissionType[defaultCommType as keyof typeof CommissionType],
+        },
+    })
 
     const formOnSubmit = handleSubmit((data: FormValues) => {
         console.log(data)
@@ -117,27 +121,39 @@ export default function Page() {
             <form
                 className="rounded-default border-separator border-2 p-9"
                 onSubmit={formOnSubmit}
+                noValidate
             >
                 <div id="form-slot">
                     <div>
                         <h5>Personal Info</h5>
                     </div>
                     <div id="form-group">
-                        <Field.Root invalid={!!errors.name}>
+                        <Field.Root invalid={!!errors.name} required>
                             <Field.Label>Your name</Field.Label>
                             <Field.Input
                                 placeholder="Name / Nickname"
                                 {...register("name", {
                                     required:
                                         "Please fill out your name/nickname",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9\s]{1,30}$/,
+                                        message:
+                                            "Only alphanumerical characters are allowed, max. 30 characters",
+                                    },
                                 })}
                             />
                             <Field.ErrorText>
                                 {errors.name?.message}
                             </Field.ErrorText>
+                            <Field.HelperText asChild>
+                                <ul className="[&>li]:mt-0!">
+                                    <li>Alphanumerical characters only</li>
+                                    <li>Maximum 30 characters</li>
+                                </ul>
+                            </Field.HelperText>
                         </Field.Root>
 
-                        <Field.Root invalid={!!errors.email}>
+                        <Field.Root invalid={!!errors.email} required>
                             <Field.Label>Email</Field.Label>
                             <Field.Input
                                 type="email"
@@ -189,11 +205,17 @@ export default function Page() {
                                 field: { name, value, ref, onBlur, onChange },
                                 fieldState: { invalid, error },
                             }) => (
-                                <Field.Root invalid={invalid}>
+                                <Field.Root invalid={invalid} required>
                                     <Select.Root
                                         name={name}
                                         collection={commTypes}
-                                        value={value ? [value] : []}
+                                        value={
+                                            defaultCommType
+                                                ? [defaultCommType]
+                                                : value
+                                                  ? [value]
+                                                  : []
+                                        }
                                         onValueChange={(e) =>
                                             onChange(e.value[0])
                                         }
@@ -249,7 +271,7 @@ export default function Page() {
                             )}
                         />
 
-                        <Field.Root invalid={!!errors.idea}>
+                        <Field.Root invalid={!!errors.idea} required>
                             <Field.Label>Commission Idea</Field.Label>
                             <Field.Textarea
                                 autoresize
@@ -263,7 +285,7 @@ export default function Page() {
                             </Field.ErrorText>
                         </Field.Root>
 
-                        <Field.Root invalid={!!errors.ref}>
+                        <Field.Root invalid={!!errors.ref} required>
                             <FileUpload.RootProvider value={fileUploadContext}>
                                 <FileUpload.Label>
                                     Reference Sheet / Visual Depiction
@@ -414,6 +436,7 @@ export default function Page() {
                                 <Field.Root
                                     className="col-span-full mt-2"
                                     invalid={invalid}
+                                    required
                                 >
                                     <Checkbox.Root
                                         name={name}
@@ -436,10 +459,11 @@ export default function Page() {
                                             of Service
                                         </Checkbox.Label>
                                         <Checkbox.HiddenInput />
+
+                                        <Field.ErrorText>
+                                            {error?.message}
+                                        </Field.ErrorText>
                                     </Checkbox.Root>
-                                    <Field.ErrorText>
-                                        {error?.message}
-                                    </Field.ErrorText>
                                 </Field.Root>
                             )}
                         />
@@ -448,7 +472,7 @@ export default function Page() {
                             name="noReserveAgreement"
                             control={control}
                             rules={{
-                                required: "Please agree to the above term",
+                                required: "Please agree to this term",
                             }}
                             render={({
                                 field: { name, value, ref, onBlur, onChange },
@@ -457,6 +481,7 @@ export default function Page() {
                                 <Field.Root
                                     className="col-span-full mt-2"
                                     invalid={invalid}
+                                    required
                                 >
                                     <Checkbox.Root
                                         name={name}
@@ -481,10 +506,11 @@ export default function Page() {
                                             decline it at their discretion
                                         </Checkbox.Label>
                                         <Checkbox.HiddenInput />
+
+                                        <Field.ErrorText className="basis-1">
+                                            {error?.message}
+                                        </Field.ErrorText>
                                     </Checkbox.Root>
-                                    <Field.ErrorText>
-                                        {error?.message}
-                                    </Field.ErrorText>
                                 </Field.Root>
                             )}
                         />

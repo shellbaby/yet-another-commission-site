@@ -2,6 +2,11 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-block: calc(var(--spacing) * 12);
+
+    #section-carousel {
+        width: 256px;
+        place-self: center;
+    }
 }
 
 #commission-price {
