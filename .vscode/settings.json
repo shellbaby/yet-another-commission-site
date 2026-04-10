@@ -8,5 +8,6 @@
         "source.organizeImports": "explicit",
         "source.addMissingImports": "explicit"
     },
-    "eslint.validate": ["json", "typescriptreact"]
+    "eslint.validate": ["json", "typescriptreact", "typescript"],
+    "js/ts.tsdk.path": "node_modules\\typescript\\lib"
 }
