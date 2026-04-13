@@ -4,7 +4,6 @@
  */
 
 export const controllers = {
-  AccessToken: () => import('#controllers/access_token_controller'),
-  NewAccount: () => import('#controllers/new_account_controller'),
-  Profile: () => import('#controllers/profile_controller'),
+  CommissionForms: () => import('#controllers/commission_forms_controller'),
+  ContactForms: () => import('#controllers/contact_forms_controller'),
 }

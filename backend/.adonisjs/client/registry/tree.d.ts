@@ -2,18 +2,26 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
-  auth: {
-    newAccount: {
-      store: typeof routes['auth.new_account.store']
+  form: {
+    commissionForms: {
+      store: typeof routes['form.commission_forms.store']
     }
-    accessToken: {
-      store: typeof routes['auth.access_token.store']
-      destroy: typeof routes['auth.access_token.destroy']
+    contactForms: {
+      store: typeof routes['form.contact_forms.store']
     }
   }
-  profile: {
-    profile: {
-      show: typeof routes['profile.profile.show']
+  admin: {
+    form: {
+      commissionForms: {
+        index: typeof routes['admin.form.commission_forms.index']
+        show: typeof routes['admin.form.commission_forms.show']
+        destroy: typeof routes['admin.form.commission_forms.destroy']
+      }
+      contactForms: {
+        index: typeof routes['admin.form.contact_forms.index']
+        show: typeof routes['admin.form.contact_forms.show']
+        destroy: typeof routes['admin.form.contact_forms.destroy']
+      }
     }
   }
 }

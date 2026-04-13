@@ -36,7 +36,7 @@ importers:
         specifier: ^4.3.0
         version: 4.3.1
       better-sqlite3:
-        specifier: ^12.8.0
+        specifier: 12.8.0
         version: 12.8.0
       luxon:
         specifier: ^3.7.2
@@ -69,6 +69,9 @@ importers:
       '@poppinss/ts-exec':
         specifier: ^1.4.4
         version: 1.4.4
+      '@stylistic/eslint-plugin':
+        specifier: ^5.10.0
+        version: 5.10.0(eslint@10.2.0)
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1

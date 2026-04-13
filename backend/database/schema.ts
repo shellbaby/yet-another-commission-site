@@ -7,55 +7,77 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
-export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = [
-    'abilities',
-    'createdAt',
-    'expiresAt',
-    'hash',
-    'id',
-    'lastUsedAt',
-    'name',
-    'tokenableId',
-    'type',
-    'updatedAt',
-  ] as const
-  $columns = AuthAccessTokenSchema.$columns
+export class ClientSchema extends BaseModel {
+  static $columns = ['clientUuid', 'createdAt', 'discord', 'email', 'id', 'name', 'password', 'tg', 'updatedAt'] as const
+  $columns = ClientSchema.$columns
   @column()
-  declare abilities: string
+  declare clientUuid: string | null
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column.dateTime()
-  declare expiresAt: DateTime | null
+  declare createdAt: DateTime
   @column()
-  declare hash: string
+  declare discord: string | null
+  @column()
+  declare email: string
   @column({ isPrimary: true })
   declare id: number
-  @column.dateTime()
-  declare lastUsedAt: DateTime | null
   @column()
-  declare name: string | null
+  declare name: string
+  @column({ serializeAs: null })
+  declare password: string
   @column()
-  declare tokenableId: number
+  declare tg: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CommissionFormSchema extends BaseModel {
+  static $columns = ['createdAt', 'discord', 'email', 'id', 'idea', 'name', 'notes', 'refSheet', 'status', 'tg', 'type', 'updatedAt'] as const
+  $columns = CommissionFormSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare discord: string | null
+  @column()
+  declare email: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare idea: string
+  @column()
+  declare name: string
+  @column()
+  declare notes: string | null
+  @column()
+  declare refSheet: string
+  @column()
+  declare status: string | null
+  @column()
+  declare tg: string | null
   @column()
   declare type: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
 
-export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
-  $columns = UserSchema.$columns
+export class CommissionSchema extends BaseModel {
+  static $columns = ['clientUuid', 'commissionNumber', 'createdAt', 'idea', 'notes', 'refSheet', 'status', 'type', 'updatedAt'] as const
+  $columns = CommissionSchema.$columns
+  @column()
+  declare clientUuid: string
+  @column({ isPrimary: true })
+  declare commissionNumber: number
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
-  declare email: string
+  declare idea: string
   @column()
-  declare fullName: string | null
-  @column({ isPrimary: true })
-  declare id: number
-  @column({ serializeAs: null })
-  declare password: string
+  declare notes: string | null
+  @column()
+  declare refSheet: string
+  @column()
+  declare status: string | null
+  @column()
+  declare type: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

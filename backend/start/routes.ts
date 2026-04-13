@@ -7,31 +7,83 @@
 |
 */
 
-import { middleware } from '#start/kernel'
-import router from '@adonisjs/core/services/router'
-import { controllers } from '#generated/controllers'
+import { controllers } from "#generated/controllers"
+import router from "@adonisjs/core/services/router"
 
-router.get('/', () => {
-  return { hello: 'world' }
+router.get("/", () => {
+    return { hello: "world" }
 })
 
 router
-  .group(() => {
-    router
-      .group(() => {
-        router.post('signup', [controllers.NewAccount, 'store'])
-        router.post('login', [controllers.AccessToken, 'store'])
-        router.post('logout', [controllers.AccessToken, 'destroy']).use(middleware.auth())
-      })
-      .prefix('auth')
-      .as('auth')
+    .group(() => {
+        router
+            .group(() => {
+                router
+                    .group(() => {
+                        router.post("/commission", [
+                            controllers.CommissionForms,
+                            "store",
+                        ])
+                        router.post("/contact", [
+                            controllers.ContactForms,
+                            "store",
+                        ])
+                    })
+                    .prefix("form")
+                    .as("form")
 
-    router
-      .group(() => {
-        router.get('/profile', [controllers.Profile, 'show'])
-      })
-      .prefix('account')
-      .as('profile')
-      .use(middleware.auth())
-  })
-  .prefix('/api/v1')
+                router
+                    .group(() => {
+                        router.get("/gallery", () => {
+                            return 0
+                        })
+                        router.get("/home", () => {
+                            return 0
+                        })
+                        router.get("/commission", () => {
+                            return 0
+                        })
+                    })
+                    .prefix("media")
+                // .as("media")
+            })
+            .prefix("client")
+        // .as("client")
+
+        router
+            .group(() => {
+                router
+                    .group(() => {
+                        router.get("/commission", [
+                            controllers.CommissionForms,
+                            "index",
+                        ])
+                        router.get("/commission/:id", [
+                            controllers.CommissionForms,
+                            "show",
+                        ])
+                        router.delete("/commission/:id", [
+                            controllers.CommissionForms,
+                            "destroy",
+                        ])
+
+                        router.get("/contact", [
+                            controllers.ContactForms,
+                            "index",
+                        ])
+                        router.get("/contact/:id", [
+                            controllers.ContactForms,
+                            "show",
+                        ])
+                        router.delete("/contact/:id", [
+                            controllers.ContactForms,
+                            "destroy",
+                        ])
+                    })
+                    .prefix("form")
+                    .as("form")
+            })
+            .prefix("admin")
+            .as("admin")
+    })
+    .prefix("/api/v1")
