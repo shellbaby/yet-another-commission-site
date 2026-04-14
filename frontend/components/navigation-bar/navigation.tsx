@@ -28,6 +28,7 @@ export const Navigation = () => {
                 </Popover.Root>
                 <Link href={"/gallery"}>gallery</Link>
                 <Link href={"/contact"}>contact</Link>
+                <Link href={"/sign-in"}>sign in</Link>
             </div>
         </nav>
     )

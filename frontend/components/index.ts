@@ -6,6 +6,7 @@ import {
     useFileUpload,
     type FileUploadFileError,
 } from "@ark-ui/react/file-upload"
+import { PasswordInput } from "@ark-ui/react/password-input"
 import { Portal } from "@ark-ui/react/portal"
 import { createListCollection, Select } from "@ark-ui/react/select"
 import { Button } from "./button/button"
@@ -14,6 +15,7 @@ import { Field } from "./field/field"
 import { Mark } from "./mark/mark"
 import { Navigation } from "./navigation-bar/navigation"
 import { Popover } from "./popover/popover"
+
 export {
     Accordion,
     Button,
@@ -27,6 +29,7 @@ export {
     FileUploadFileError,
     Mark,
     Navigation,
+    PasswordInput,
     Popover,
     Portal,
     Select,

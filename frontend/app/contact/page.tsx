@@ -2,7 +2,7 @@ import { Button, Field } from "@/components"
 
 export default function Page() {
     return (
-        <div className="mt-8 grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8">
             <div>
                 <h5 className="text-center">Contact me through...</h5>
                 <div className="mt-4 flex flex-col gap-2">
