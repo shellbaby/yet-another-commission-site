@@ -6,53 +6,107 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'form.commission_forms.store': {
+  'client.clients.store': {
     methods: ["POST"],
-    pattern: '/api/v1/client/form/commission',
-    tokens: [{"old":"/api/v1/client/form/commission","type":0,"val":"api","end":""},{"old":"/api/v1/client/form/commission","type":0,"val":"v1","end":""},{"old":"/api/v1/client/form/commission","type":0,"val":"client","end":""},{"old":"/api/v1/client/form/commission","type":0,"val":"form","end":""},{"old":"/api/v1/client/form/commission","type":0,"val":"commission","end":""}],
-    types: placeholder as Registry['form.commission_forms.store']['types'],
+    pattern: '/api/v1/clients',
+    tokens: [{"old":"/api/v1/clients","type":0,"val":"api","end":""},{"old":"/api/v1/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['client.clients.store']['types'],
   },
-  'form.contact_forms.store': {
+  'client.clients.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['client.clients.update']['types'],
+  },
+  'client.clients.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['client.clients.destroy']['types'],
+  },
+  'client.commissions.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/commissions',
+    tokens: [{"old":"/api/v1/commissions","type":0,"val":"api","end":""},{"old":"/api/v1/commissions","type":0,"val":"v1","end":""},{"old":"/api/v1/commissions","type":0,"val":"commissions","end":""}],
+    types: placeholder as Registry['client.commissions.index']['types'],
+  },
+  'client.commissions.store': {
     methods: ["POST"],
-    pattern: '/api/v1/client/form/contact',
-    tokens: [{"old":"/api/v1/client/form/contact","type":0,"val":"api","end":""},{"old":"/api/v1/client/form/contact","type":0,"val":"v1","end":""},{"old":"/api/v1/client/form/contact","type":0,"val":"client","end":""},{"old":"/api/v1/client/form/contact","type":0,"val":"form","end":""},{"old":"/api/v1/client/form/contact","type":0,"val":"contact","end":""}],
-    types: placeholder as Registry['form.contact_forms.store']['types'],
+    pattern: '/api/v1/commissions',
+    tokens: [{"old":"/api/v1/commissions","type":0,"val":"api","end":""},{"old":"/api/v1/commissions","type":0,"val":"v1","end":""},{"old":"/api/v1/commissions","type":0,"val":"commissions","end":""}],
+    types: placeholder as Registry['client.commissions.store']['types'],
   },
-  'admin.form.commission_forms.index': {
+  'client.commissions.show': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/admin/form/commission',
-    tokens: [{"old":"/api/v1/admin/form/commission","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/commission","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/commission","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/commission","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/commission","type":0,"val":"commission","end":""}],
-    types: placeholder as Registry['admin.form.commission_forms.index']['types'],
+    pattern: '/api/v1/commissions/:id',
+    tokens: [{"old":"/api/v1/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/commissions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['client.commissions.show']['types'],
   },
-  'admin.form.commission_forms.show': {
-    methods: ["GET","HEAD"],
-    pattern: '/api/v1/admin/form/commission/:id',
-    tokens: [{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"commission","end":""},{"old":"/api/v1/admin/form/commission/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['admin.form.commission_forms.show']['types'],
-  },
-  'admin.form.commission_forms.destroy': {
+  'client.commissions.destroy': {
     methods: ["DELETE"],
-    pattern: '/api/v1/admin/form/commission/:id',
-    tokens: [{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/commission/:id","type":0,"val":"commission","end":""},{"old":"/api/v1/admin/form/commission/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['admin.form.commission_forms.destroy']['types'],
+    pattern: '/api/v1/commissions/:id',
+    tokens: [{"old":"/api/v1/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/commissions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['client.commissions.destroy']['types'],
   },
-  'admin.form.contact_forms.index': {
+  'admin.clients.index': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/admin/form/contact',
-    tokens: [{"old":"/api/v1/admin/form/contact","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/contact","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/contact","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/contact","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/contact","type":0,"val":"contact","end":""}],
-    types: placeholder as Registry['admin.form.contact_forms.index']['types'],
+    pattern: '/api/v1/admin/clients',
+    tokens: [{"old":"/api/v1/admin/clients","type":0,"val":"api","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['admin.clients.index']['types'],
   },
-  'admin.form.contact_forms.show': {
+  'admin.clients.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/admin/clients',
+    tokens: [{"old":"/api/v1/admin/clients","type":0,"val":"api","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['admin.clients.store']['types'],
+  },
+  'admin.clients.show': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/admin/form/contact/:id',
-    tokens: [{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"contact","end":""},{"old":"/api/v1/admin/form/contact/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['admin.form.contact_forms.show']['types'],
+    pattern: '/api/v1/admin/clients/:id',
+    tokens: [{"old":"/api/v1/admin/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/admin/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.clients.show']['types'],
   },
-  'admin.form.contact_forms.destroy': {
+  'admin.clients.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/api/v1/admin/clients/:id',
+    tokens: [{"old":"/api/v1/admin/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/admin/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.clients.update']['types'],
+  },
+  'admin.clients.destroy': {
     methods: ["DELETE"],
-    pattern: '/api/v1/admin/form/contact/:id',
-    tokens: [{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"form","end":""},{"old":"/api/v1/admin/form/contact/:id","type":0,"val":"contact","end":""},{"old":"/api/v1/admin/form/contact/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['admin.form.contact_forms.destroy']['types'],
+    pattern: '/api/v1/admin/clients/:id',
+    tokens: [{"old":"/api/v1/admin/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/admin/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.clients.destroy']['types'],
+  },
+  'admin.commissions.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admin/commissions',
+    tokens: [{"old":"/api/v1/admin/commissions","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"commissions","end":""}],
+    types: placeholder as Registry['admin.commissions.index']['types'],
+  },
+  'admin.commissions.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/admin/commissions',
+    tokens: [{"old":"/api/v1/admin/commissions","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions","type":0,"val":"commissions","end":""}],
+    types: placeholder as Registry['admin.commissions.store']['types'],
+  },
+  'admin.commissions.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admin/commissions/:id',
+    tokens: [{"old":"/api/v1/admin/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/admin/commissions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.commissions.show']['types'],
+  },
+  'admin.commissions.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/api/v1/admin/commissions/:id',
+    tokens: [{"old":"/api/v1/admin/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/admin/commissions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.commissions.update']['types'],
+  },
+  'admin.commissions.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/admin/commissions/:id',
+    tokens: [{"old":"/api/v1/admin/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/admin/commissions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['admin.commissions.destroy']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

@@ -2,26 +2,33 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
-  form: {
-    commissionForms: {
-      store: typeof routes['form.commission_forms.store']
+  client: {
+    clients: {
+      store: typeof routes['client.clients.store']
+      update: typeof routes['client.clients.update']
+      destroy: typeof routes['client.clients.destroy']
     }
-    contactForms: {
-      store: typeof routes['form.contact_forms.store']
+    commissions: {
+      index: typeof routes['client.commissions.index']
+      store: typeof routes['client.commissions.store']
+      show: typeof routes['client.commissions.show']
+      destroy: typeof routes['client.commissions.destroy']
     }
   }
   admin: {
-    form: {
-      commissionForms: {
-        index: typeof routes['admin.form.commission_forms.index']
-        show: typeof routes['admin.form.commission_forms.show']
-        destroy: typeof routes['admin.form.commission_forms.destroy']
-      }
-      contactForms: {
-        index: typeof routes['admin.form.contact_forms.index']
-        show: typeof routes['admin.form.contact_forms.show']
-        destroy: typeof routes['admin.form.contact_forms.destroy']
-      }
+    clients: {
+      index: typeof routes['admin.clients.index']
+      store: typeof routes['admin.clients.store']
+      show: typeof routes['admin.clients.show']
+      update: typeof routes['admin.clients.update']
+      destroy: typeof routes['admin.clients.destroy']
+    }
+    commissions: {
+      index: typeof routes['admin.commissions.index']
+      store: typeof routes['admin.commissions.store']
+      show: typeof routes['admin.commissions.show']
+      update: typeof routes['admin.commissions.update']
+      destroy: typeof routes['admin.commissions.destroy']
     }
   }
 }

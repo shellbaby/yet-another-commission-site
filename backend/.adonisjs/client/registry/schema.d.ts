@@ -7,100 +7,208 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'form.commission_forms.store': {
+  'client.clients.store': {
     methods: ["POST"]
-    pattern: '/api/v1/client/form/commission'
+    pattern: '/api/v1/clients'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['store']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['store']>>>
     }
   }
-  'form.contact_forms.store': {
+  'client.clients.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/v1/clients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['update']>>>
+    }
+  }
+  'client.clients.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/clients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['destroy']>>>
+    }
+  }
+  'client.commissions.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/commissions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['index']>>>
+    }
+  }
+  'client.commissions.store': {
     methods: ["POST"]
-    pattern: '/api/v1/client/form/contact'
+    pattern: '/api/v1/commissions'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['store']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['store']>>>
     }
   }
-  'admin.form.commission_forms.index': {
+  'client.commissions.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/form/commission'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['index']>>>
-    }
-  }
-  'admin.form.commission_forms.show': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/form/commission/:id'
+    pattern: '/api/v1/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['show']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['show']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['show']>>>
     }
   }
-  'admin.form.commission_forms.destroy': {
+  'client.commissions.destroy': {
     methods: ["DELETE"]
-    pattern: '/api/v1/admin/form/commission/:id'
+    pattern: '/api/v1/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/commission_forms_controller').default['destroy']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['destroy']>>>
     }
   }
-  'admin.form.contact_forms.index': {
+  'admin.clients.index': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/form/contact'
+    pattern: '/api/v1/admin/clients'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['index']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['index']>>>
     }
   }
-  'admin.form.contact_forms.show': {
+  'admin.clients.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/admin/clients'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['store']>>>
+    }
+  }
+  'admin.clients.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/form/contact/:id'
+    pattern: '/api/v1/admin/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['show']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['show']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['show']>>>
     }
   }
-  'admin.form.contact_forms.destroy': {
-    methods: ["DELETE"]
-    pattern: '/api/v1/admin/form/contact/:id'
+  'admin.clients.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/v1/admin/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/contact_forms_controller').default['destroy']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['update']>>>
+    }
+  }
+  'admin.clients.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admin/clients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/clients_controller').default['destroy']>>>
+    }
+  }
+  'admin.commissions.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admin/commissions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['index']>>>
+    }
+  }
+  'admin.commissions.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/admin/commissions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['store']>>>
+    }
+  }
+  'admin.commissions.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admin/commissions/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['show']>>>
+    }
+  }
+  'admin.commissions.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/v1/admin/commissions/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['update']>>>
+    }
+  }
+  'admin.commissions.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admin/commissions/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['destroy']>>>
     }
   }
 }

@@ -19,69 +19,20 @@ router
         router
             .group(() => {
                 router
-                    .group(() => {
-                        router.post("/commission", [
-                            controllers.CommissionForms,
-                            "store",
-                        ])
-                        router.post("/contact", [
-                            controllers.ContactForms,
-                            "store",
-                        ])
-                    })
-                    .prefix("form")
-                    .as("form")
-
+                    .resource("clients", controllers.client.Clients)
+                    .only(["store", "update", "destroy"])
                 router
-                    .group(() => {
-                        router.get("/gallery", () => {
-                            return 0
-                        })
-                        router.get("/home", () => {
-                            return 0
-                        })
-                        router.get("/commission", () => {
-                            return 0
-                        })
-                    })
-                    .prefix("media")
-                // .as("media")
+                    .resource("commissions", controllers.client.Commissions)
+                    .only(["index", "store", "show", "destroy"])
             })
-            .prefix("client")
-        // .as("client")
+            .as("client")
 
         router
             .group(() => {
+                router.resource("clients", controllers.admin.Clients).apiOnly()
                 router
-                    .group(() => {
-                        router.get("/commission", [
-                            controllers.CommissionForms,
-                            "index",
-                        ])
-                        router.get("/commission/:id", [
-                            controllers.CommissionForms,
-                            "show",
-                        ])
-                        router.delete("/commission/:id", [
-                            controllers.CommissionForms,
-                            "destroy",
-                        ])
-
-                        router.get("/contact", [
-                            controllers.ContactForms,
-                            "index",
-                        ])
-                        router.get("/contact/:id", [
-                            controllers.ContactForms,
-                            "show",
-                        ])
-                        router.delete("/contact/:id", [
-                            controllers.ContactForms,
-                            "destroy",
-                        ])
-                    })
-                    .prefix("form")
-                    .as("form")
+                    .resource("commissions", controllers.admin.Commissions)
+                    .apiOnly()
             })
             .prefix("admin")
             .as("admin")
