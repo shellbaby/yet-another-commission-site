@@ -50,16 +50,6 @@ export default function Page() {
                         <Field.ErrorText>
                             {errors.username_email?.message}
                         </Field.ErrorText>
-
-                        <Field.HelperText asChild>
-                            <ul className="[&>li]:mt-0!">
-                                <li>
-                                    Minimum 3, maximum 30 characters for
-                                    username
-                                </li>
-                                <li>Only . _ - are allowed</li>
-                            </ul>
-                        </Field.HelperText>
                     </Field.Root>
 
                     <Field.Root required invalid={!!errors.password}>
@@ -69,12 +59,7 @@ export default function Page() {
                                 <PasswordInput.Input
                                     {...register("password", {
                                         required:
-                                            "Please provide your password",
-                                        pattern: {
-                                            value: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/,
-                                            message:
-                                                "Please make sure password is secure enough",
-                                        },
+                                            "Please fill out your password",
                                     })}
                                     autoCapitalize="none"
                                 />
@@ -92,14 +77,6 @@ export default function Page() {
                         <Field.ErrorText>
                             {errors.password?.message}
                         </Field.ErrorText>
-                        <Field.HelperText>
-                            <ul className="[&>li]:mt-0!">
-                                <li>
-                                    Include at least 1 number or 1 character
-                                </li>
-                                <li>Minimum 8 characters</li>
-                            </ul>
-                        </Field.HelperText>
                     </Field.Root>
 
                     <div className="flex items-center justify-between">
