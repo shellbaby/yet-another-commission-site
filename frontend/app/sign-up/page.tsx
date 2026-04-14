@@ -55,7 +55,7 @@ export default function Page() {
                             {...register("username", {
                                 required: "Please fill out your username",
                                 pattern: {
-                                    value: /^(?:[a-zA-Z0-9._-]{3,30})$/,
+                                    value: /^[a-zA-Z0-9._-]{3,30}$/,
                                     message: "Must be a valid username",
                                 },
                             })}
@@ -80,7 +80,7 @@ export default function Page() {
                             {...register("email", {
                                 required: "Please fill out your email",
                                 pattern: {
-                                    value: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
+                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                                     message: "Must be a valid email",
                                 },
                             })}
@@ -92,8 +92,10 @@ export default function Page() {
 
                     <Field.Root>
                         <Field.Label>What should I call you?</Field.Label>
-                        <Field.Input placeholder="Name / Nickname" />
-                        <Field.ErrorText />
+                        <Field.Input
+                            placeholder="Name / Nickname"
+                            {...register("name")}
+                        />
                     </Field.Root>
 
                     <Field.Root required invalid={!!errors.password}>
@@ -166,7 +168,7 @@ export default function Page() {
                         </Field.ErrorText>
                     </Field.Root>
 
-                    <Button className="mt-3">Sign In</Button>
+                    <Button className="mt-3">Sign Up</Button>
                 </form>
             </div>
         </div>
