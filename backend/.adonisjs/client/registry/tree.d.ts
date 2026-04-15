@@ -5,6 +5,7 @@ export interface ApiDefinition {
   client: {
     clients: {
       store: typeof routes['client.clients.store']
+      show: typeof routes['client.clients.show']
       update: typeof routes['client.clients.update']
       destroy: typeof routes['client.clients.destroy']
     }

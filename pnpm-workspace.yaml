@@ -1,0 +1,10 @@
+packages:
+    - frontend
+    - backend
+    - shared
+
+onlyBuiltDependencies:
+    - "@swc/core"
+    - better-sqlite3
+    - sharp
+    - unrs-resolver

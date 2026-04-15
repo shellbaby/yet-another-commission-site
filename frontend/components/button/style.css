@@ -17,13 +17,19 @@
         justify-content: center;
         font-weight: bold;
 
-        &:is(:hover, :focus-visible) {
+        &:not(:disabled):is(:hover, :focus-visible) {
             background: var(--color);
             color: var(--color-white);
         }
 
         &:focus-visible {
             outline: none;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            border-color: oklch(from var(--color) l c h / 0.3);
+            color: oklch(from var(--color) l c h / 0.3);
         }
     }
 }

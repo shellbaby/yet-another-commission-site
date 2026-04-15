@@ -1,18 +1,19 @@
 "use client"
 
 import { Button, Field, PasswordInput } from "@/components"
+import { clientsService } from "@/services/client/clients-service"
+import { Client } from "@/types/clients"
 import { ViewIcon, ViewOffIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useState } from "react"
 import { useForm, useFormState, useWatch } from "react-hook-form"
 
+interface FormValues extends Omit<Client, "created_at" | "updated_at"> {
+    retype_pwd: string
+}
+
 export default function Page() {
-    interface FormValues {
-        username: string
-        email: string
-        name: string
-        password: string
-        retype_pwd: string
-    }
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const {
         register,
@@ -22,8 +23,19 @@ export default function Page() {
         trigger,
     } = useForm<FormValues>()
 
-    const formOnSubmit = handleSubmit((data: FormValues) => {
-        console.log(data)
+    const formOnSubmit = handleSubmit(async ({ retype_pwd, ...data }) => {
+        setIsSubmitting(true)
+        const created_at = new Date()
+        await clientsService
+            .store({
+                ...data,
+                created_at,
+            })
+            .catch((error: Error) => {
+                console.error(error)
+                setIsSubmitting(false)
+            })
+            .then((res) => console.log(res))
     })
 
     const { touchedFields } = useFormState({ control })
@@ -168,7 +180,9 @@ export default function Page() {
                         </Field.ErrorText>
                     </Field.Root>
 
-                    <Button className="mt-3">Sign Up</Button>
+                    <Button className="mt-3" disabled={isSubmitting}>
+                        {isSubmitting ? "Signing Up..." : "Sign Up"}
+                    </Button>
                 </form>
             </div>
         </div>

@@ -5,6 +5,7 @@ type ParamValue = string | number | bigint | boolean
 export type ScannedRoutes = {
   ALL: {
     'client.clients.store': { paramsTuple?: []; params?: {} }
+    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'client.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'client.clients.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'client.commissions.index': { paramsTuple?: []; params?: {} }
@@ -23,6 +24,7 @@ export type ScannedRoutes = {
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
+    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'client.commissions.index': { paramsTuple?: []; params?: {} }
     'client.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.clients.index': { paramsTuple?: []; params?: {} }
@@ -31,6 +33,7 @@ export type ScannedRoutes = {
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
+    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'client.commissions.index': { paramsTuple?: []; params?: {} }
     'client.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.clients.index': { paramsTuple?: []; params?: {} }

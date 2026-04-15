@@ -20,7 +20,7 @@ router
             .group(() => {
                 router
                     .resource("clients", controllers.client.Clients)
-                    .only(["store", "update", "destroy"])
+                    .only(["store", "show", "update", "destroy"])
                 router
                     .resource("commissions", controllers.client.Commissions)
                     .only(["index", "store", "show", "destroy"])
