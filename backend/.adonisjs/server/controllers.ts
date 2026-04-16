@@ -8,9 +8,16 @@ export const controllers = {
     Clients: () => import('#controllers/admin/clients_controller'),
     Commissions: () => import('#controllers/admin/commissions_controller'),
   },
+  auth: {
+    Session: () => import('#controllers/auth/session_controller'),
+    Signup: () => import('#controllers/auth/signup_controller'),
+  },
   client: {
     Clients: () => import('#controllers/client/clients_controller'),
     Commissions: () => import('#controllers/client/commissions_controller'),
   },
   ContactForms: () => import('#controllers/contact_forms_controller'),
+  email: {
+    Emails: () => import('#controllers/email/emails_controller'),
+  },
 }

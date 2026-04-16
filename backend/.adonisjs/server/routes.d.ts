@@ -22,6 +22,7 @@ export type ScannedRoutes = {
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
   }
   GET: {
     'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -31,6 +32,7 @@ export type ScannedRoutes = {
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
   }
   HEAD: {
     'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -40,6 +42,7 @@ export type ScannedRoutes = {
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
   }
   POST: {
     'client.clients.store': { paramsTuple?: []; params?: {} }

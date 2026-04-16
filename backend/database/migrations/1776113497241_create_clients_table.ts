@@ -7,15 +7,16 @@ export default class extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.increments("id", { primaryKey: false }).unique()
 
-            table
-                .uuid("client_uuid")
-                .primary()
-                .defaultTo(this.db.rawQuery("gen_random_uuid()").knexQuery)
-            table.string("username", 100).notNullable()
-            table.string("email", 255).notNullable().unique()
+            // From frontend //
+            table.string("username", 30).notNullable()
+            table.string("email", 254).notNullable().unique()
             table.string("name", 255).nullable()
             table.string("password", 255).notNullable()
-
+            
+            // Generated at backend //
+            table.uuid("client_uuid").primary()
+            table.boolean("is_verified").defaultTo(false)
+            table.string("verification_token").nullable()
             table.timestamp("created_at", { useTz: true }).notNullable()
             table.timestamp("updated_at", { useTz: true }).nullable()
         })

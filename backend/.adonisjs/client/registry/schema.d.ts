@@ -11,12 +11,12 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/api/v1/clients'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/client').signupValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/client').signupValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'client.clients.show': {
@@ -221,6 +221,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/commissions_controller').default['destroy']>>>
+    }
+  }
+  'auth.emails.verify': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/auth/verify/:email'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { email: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/email/emails_controller').default['verify']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/email/emails_controller').default['verify']>>>
     }
   }
 }

@@ -114,6 +114,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admin/commissions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"admin","end":""},{"old":"/api/v1/admin/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/api/v1/admin/commissions/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['admin.commissions.destroy']['types'],
   },
+  'auth.emails.verify': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/auth/verify/:email',
+    tokens: [{"old":"/api/v1/auth/verify/:email","type":0,"val":"api","end":""},{"old":"/api/v1/auth/verify/:email","type":0,"val":"v1","end":""},{"old":"/api/v1/auth/verify/:email","type":0,"val":"auth","end":""},{"old":"/api/v1/auth/verify/:email","type":0,"val":"verify","end":""},{"old":"/api/v1/auth/verify/:email","type":1,"val":"email","end":""}],
+    types: placeholder as Registry['auth.emails.verify']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

@@ -8,55 +8,28 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class ClientSchema extends BaseModel {
-  static $columns = ['clientUuid', 'createdAt', 'discord', 'email', 'id', 'name', 'password', 'tg', 'updatedAt'] as const
+  static $columns = ['clientUuid', 'createdAt', 'email', 'id', 'isVerified', 'name', 'password', 'updatedAt', 'username', 'verificationToken'] as const
   $columns = ClientSchema.$columns
   @column()
   declare clientUuid: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
-  declare discord: string | null
-  @column()
   declare email: string
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare name: string
+  declare isVerified: boolean | null
+  @column()
+  declare name: string | null
   @column({ serializeAs: null })
   declare password: string
-  @column()
-  declare tg: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-}
-
-export class CommissionFormSchema extends BaseModel {
-  static $columns = ['createdAt', 'discord', 'email', 'id', 'idea', 'name', 'notes', 'refSheet', 'status', 'tg', 'type', 'updatedAt'] as const
-  $columns = CommissionFormSchema.$columns
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
   @column()
-  declare discord: string | null
+  declare username: string
   @column()
-  declare email: string
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare idea: string
-  @column()
-  declare name: string
-  @column()
-  declare notes: string | null
-  @column()
-  declare refSheet: string
-  @column()
-  declare status: string | null
-  @column()
-  declare tg: string | null
-  @column()
-  declare type: string
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare verificationToken: string | null
 }
 
 export class CommissionSchema extends BaseModel {

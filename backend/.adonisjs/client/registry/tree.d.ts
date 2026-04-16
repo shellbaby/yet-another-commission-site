@@ -32,4 +32,9 @@ export interface ApiDefinition {
       destroy: typeof routes['admin.commissions.destroy']
     }
   }
+  auth: {
+    emails: {
+      verify: typeof routes['auth.emails.verify']
+    }
+  }
 }

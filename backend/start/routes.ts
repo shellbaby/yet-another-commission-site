@@ -36,5 +36,15 @@ router
             })
             .prefix("admin")
             .as("admin")
+
+        router
+            .group(() => {
+                router.get("verify/:email", [
+                    controllers.email.Emails,
+                    "verify",
+                ])
+            })
+            .prefix("auth")
+            .as("auth")
     })
     .prefix("/api/v1")

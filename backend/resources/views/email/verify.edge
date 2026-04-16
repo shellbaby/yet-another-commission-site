@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .button {
+      background-color: #000;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    p, h2 {
+        line-height: calc(2px + 2ex + 2px);
+    }
+
+    h2 {
+        font-size: 2.488rem;
+        font-weight: 700;
+    }
+
+    small {
+        font-size: 0.833rem;
+    }
+
+    body {
+        background-color: #fff1e8;
+        color: #4a3052;
+        margin: 0;
+    }
+
+    body > * {
+        margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Just one last step!</h2>
+  <p>Greetings, name!</p>
+  <p>Thank you for signing up and becoming one of our valuable customers at the Qilin Cafe. To finish creating your account, please click the button below to verify your email address.</p>
+  
+  <a href="{{ url }}" class="button">Verify Email Address</a>
+
+  <p>If it doesn't work, please use this link instead:</p>
+  <p>{{ url }}</p>
+  
+  <p>Note: This link will expire in 24 hours.</p>
+</body>
+</html>

@@ -8,7 +8,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { useState } from "react"
 import { useForm, useFormState, useWatch } from "react-hook-form"
 
-interface FormValues extends Omit<Client, "created_at" | "updated_at"> {
+interface FormValues extends Client {
     retype_pwd: string
 }
 
@@ -25,11 +25,9 @@ export default function Page() {
 
     const formOnSubmit = handleSubmit(async ({ retype_pwd, ...data }) => {
         setIsSubmitting(true)
-        const created_at = new Date()
         await clientsService
             .store({
                 ...data,
-                created_at,
             })
             .catch((error: Error) => {
                 console.error(error)
