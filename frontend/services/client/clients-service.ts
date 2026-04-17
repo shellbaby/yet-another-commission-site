@@ -4,7 +4,7 @@ import { customFetch } from "../base-service"
 
 export const clientsService = {
     store: (data: StoreClientDTO) => {
-        return customFetch<APIResponse>("clients", {
+        return customFetch<APIResponse<{ message: string }>>("clients", {
             method: "POST",
             body: JSON.stringify(data),
         })

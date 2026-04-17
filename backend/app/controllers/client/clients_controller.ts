@@ -1,10 +1,12 @@
 import { appUrl } from "#config/app"
 import Client from "#models/client"
+import { sendResponse } from "#services/api-utils"
 import { signupValidator } from "#validators/client"
 import stringHelpers from "@adonisjs/core/helpers/string"
 import type { HttpContext } from "@adonisjs/core/http"
 import { signedUrlFor } from "@adonisjs/core/services/url_builder"
 import mail from "@adonisjs/mail/services/main"
+import { HttpStatus } from "@shellbaby/shared/http-status"
 
 export default class ClientsController {
     /**
@@ -56,9 +58,13 @@ export default class ClientsController {
             secure: process.env.NODE_ENV === "production",
         })
 
-        return response.created({
-            message: "Client created",
-        })
+        // return response.created({
+        //     message: "Client created",
+        // })
+
+        return response.created(
+            sendResponse({ message: "Client created" }, HttpStatus.CREATED)
+        )
     }
 
     /**

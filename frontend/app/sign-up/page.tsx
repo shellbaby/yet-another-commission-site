@@ -12,7 +12,13 @@ import {
 import { clientsService } from "@/services/client/clients-service"
 import { Client } from "@/types/clients"
 import { FormError } from "@/types/error"
-import { Cancel01Icon, ViewIcon, ViewOffIcon } from "@hugeicons/core-free-icons"
+import {
+    AlertCircleIcon,
+    Cancel01Icon,
+    CheckmarkCircle02Icon,
+    ViewIcon,
+    ViewOffIcon,
+} from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { AdonisErrorType } from "@shellbaby/shared/api-response"
 import { useEffect, useState } from "react"
@@ -51,7 +57,23 @@ export default function Page() {
                 setHasServerError(error.errors)
                 setIsSubmitting(false)
             })
-            .then((res) => console.log(res))
+            .then((res) => {
+                if (res) {
+                    queueMicrotask(() => {
+                        toaster.create({
+                            title: (
+                                <span className="flex items-center gap-3">
+                                    <HugeiconsIcon
+                                        icon={CheckmarkCircle02Icon}
+                                    />
+                                    <span>Signed up successfully!</span>
+                                </span>
+                            ),
+                            type: "success",
+                        })
+                    })
+                }
+            })
     })
 
     const { touchedFields } = useFormState({ control })
@@ -70,13 +92,24 @@ export default function Page() {
     useEffect(() => {
         queueMicrotask(() => {
             if (hasServerError) {
-                console.log(hasServerError)
                 toaster.create({
-                    title: "One or more fields need to be fixed",
-                    description: hasServerError.map((msg, idx) => (
-                        <p key={idx}>{msg.message}</p>
-                    )),
+                    title: (
+                        <span className="flex items-center gap-3">
+                            <HugeiconsIcon icon={AlertCircleIcon} />
+                            <span>One or more fields need to be fixed</span>
+                        </span>
+                    ),
+                    description: (
+                        <ul className="mt-1">
+                            {hasServerError.map((msg, idx) => (
+                                <li key={idx} className="m-0!">
+                                    {msg.message}
+                                </li>
+                            ))}
+                        </ul>
+                    ),
                     type: "error",
+                    duration: Infinity,
                 })
             }
         })

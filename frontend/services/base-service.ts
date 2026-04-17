@@ -33,6 +33,11 @@ export async function customFetch<T>(
                 result.errors
             )
         }
+
+        throw new FormError(
+            "An unknown error occured, Please try again later",
+            response.status
+        )
     }
 
     // if (!response.ok || !result.success) {
