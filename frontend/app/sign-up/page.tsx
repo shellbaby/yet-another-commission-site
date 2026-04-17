@@ -1,19 +1,36 @@
 "use client"
 
-import { Button, Field, PasswordInput } from "@/components"
+import {
+    Button,
+    createToaster,
+    Field,
+    PasswordInput,
+    Portal,
+    Toast,
+    Toaster,
+} from "@/components"
 import { clientsService } from "@/services/client/clients-service"
 import { Client } from "@/types/clients"
-import { ViewIcon, ViewOffIcon } from "@hugeicons/core-free-icons"
+import { FormError } from "@/types/error"
+import { Cancel01Icon, ViewIcon, ViewOffIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { useState } from "react"
+import { AdonisErrorType } from "@shellbaby/shared/api-response"
+import { useEffect, useState } from "react"
 import { useForm, useFormState, useWatch } from "react-hook-form"
 
 interface FormValues extends Client {
     retype_pwd: string
 }
 
+const toaster = createToaster({
+    placement: "bottom-end",
+    overlap: true,
+    gap: 24,
+})
+
 export default function Page() {
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [hasServerError, setHasServerError] = useState<AdonisErrorType[]>()
 
     const {
         register,
@@ -24,13 +41,14 @@ export default function Page() {
     } = useForm<FormValues>()
 
     const formOnSubmit = handleSubmit(async ({ retype_pwd, ...data }) => {
+        setHasServerError(undefined)
         setIsSubmitting(true)
         await clientsService
             .store({
                 ...data,
             })
-            .catch((error: Error) => {
-                console.error(error)
+            .catch((error: FormError) => {
+                setHasServerError(error.errors)
                 setIsSubmitting(false)
             })
             .then((res) => console.log(res))
@@ -49,8 +67,23 @@ export default function Page() {
         },
     })
 
+    useEffect(() => {
+        queueMicrotask(() => {
+            if (hasServerError) {
+                console.log(hasServerError)
+                toaster.create({
+                    title: "One or more fields need to be fixed",
+                    description: hasServerError.map((msg, idx) => (
+                        <p key={idx}>{msg.message}</p>
+                    )),
+                    type: "error",
+                })
+            }
+        })
+    }, [hasServerError])
+
     return (
-        <div className="mx-auto max-w-md">
+        <div className="p- mx-auto max-w-md">
             <h2 className="my-12 text-center">Sign Up</h2>
 
             <div className="border-separator mt-4 rounded-md border-2 p-6">
@@ -178,11 +211,31 @@ export default function Page() {
                         </Field.ErrorText>
                     </Field.Root>
 
-                    <Button className="mt-3" disabled={isSubmitting}>
+                    <Button
+                        className="mt-3"
+                        disabled={isSubmitting}
+                        type="submit"
+                    >
                         {isSubmitting ? "Signing Up..." : "Sign Up"}
                     </Button>
                 </form>
             </div>
+
+            <Portal>
+                <Toaster toaster={toaster}>
+                    {(toast) => (
+                        <Toast.Root key={toast.id}>
+                            <Toast.Title>{toast.title}</Toast.Title>
+                            <Toast.Description>
+                                {toast.description}
+                            </Toast.Description>
+                            <Toast.CloseTrigger>
+                                <HugeiconsIcon icon={Cancel01Icon} />
+                            </Toast.CloseTrigger>
+                        </Toast.Root>
+                    )}
+                </Toaster>
+            </Portal>
         </div>
     )
 }

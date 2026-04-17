@@ -9,7 +9,7 @@ export type ParamValue = string | number | bigint | boolean
 export interface Registry {
   'client.clients.store': {
     methods: ["POST"]
-    pattern: '/api/v1/clients'
+    pattern: '/v1/clients'
     types: {
       body: ExtractBody<InferInput<(typeof import('#validators/client').signupValidator)>>
       paramsTuple: []
@@ -21,7 +21,7 @@ export interface Registry {
   }
   'client.clients.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/clients/:id'
+    pattern: '/v1/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -33,7 +33,7 @@ export interface Registry {
   }
   'client.clients.update': {
     methods: ["PUT","PATCH"]
-    pattern: '/api/v1/clients/:id'
+    pattern: '/v1/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -45,7 +45,7 @@ export interface Registry {
   }
   'client.clients.destroy': {
     methods: ["DELETE"]
-    pattern: '/api/v1/clients/:id'
+    pattern: '/v1/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -57,7 +57,7 @@ export interface Registry {
   }
   'client.commissions.index': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/commissions'
+    pattern: '/v1/commissions'
     types: {
       body: {}
       paramsTuple: []
@@ -69,7 +69,7 @@ export interface Registry {
   }
   'client.commissions.store': {
     methods: ["POST"]
-    pattern: '/api/v1/commissions'
+    pattern: '/v1/commissions'
     types: {
       body: {}
       paramsTuple: []
@@ -81,7 +81,7 @@ export interface Registry {
   }
   'client.commissions.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/commissions/:id'
+    pattern: '/v1/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -93,7 +93,7 @@ export interface Registry {
   }
   'client.commissions.destroy': {
     methods: ["DELETE"]
-    pattern: '/api/v1/commissions/:id'
+    pattern: '/v1/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -105,7 +105,7 @@ export interface Registry {
   }
   'admin.clients.index': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/clients'
+    pattern: '/v1/admin/clients'
     types: {
       body: {}
       paramsTuple: []
@@ -117,7 +117,7 @@ export interface Registry {
   }
   'admin.clients.store': {
     methods: ["POST"]
-    pattern: '/api/v1/admin/clients'
+    pattern: '/v1/admin/clients'
     types: {
       body: {}
       paramsTuple: []
@@ -129,7 +129,7 @@ export interface Registry {
   }
   'admin.clients.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/clients/:id'
+    pattern: '/v1/admin/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -141,7 +141,7 @@ export interface Registry {
   }
   'admin.clients.update': {
     methods: ["PUT","PATCH"]
-    pattern: '/api/v1/admin/clients/:id'
+    pattern: '/v1/admin/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -153,7 +153,7 @@ export interface Registry {
   }
   'admin.clients.destroy': {
     methods: ["DELETE"]
-    pattern: '/api/v1/admin/clients/:id'
+    pattern: '/v1/admin/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -165,7 +165,7 @@ export interface Registry {
   }
   'admin.commissions.index': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/commissions'
+    pattern: '/v1/admin/commissions'
     types: {
       body: {}
       paramsTuple: []
@@ -177,7 +177,7 @@ export interface Registry {
   }
   'admin.commissions.store': {
     methods: ["POST"]
-    pattern: '/api/v1/admin/commissions'
+    pattern: '/v1/admin/commissions'
     types: {
       body: {}
       paramsTuple: []
@@ -189,7 +189,7 @@ export interface Registry {
   }
   'admin.commissions.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admin/commissions/:id'
+    pattern: '/v1/admin/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -201,7 +201,7 @@ export interface Registry {
   }
   'admin.commissions.update': {
     methods: ["PUT","PATCH"]
-    pattern: '/api/v1/admin/commissions/:id'
+    pattern: '/v1/admin/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -213,7 +213,7 @@ export interface Registry {
   }
   'admin.commissions.destroy': {
     methods: ["DELETE"]
-    pattern: '/api/v1/admin/commissions/:id'
+    pattern: '/v1/admin/commissions/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -225,7 +225,7 @@ export interface Registry {
   }
   'auth.emails.verify': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/auth/verify/:email'
+    pattern: '/v1/auth/verify/:email'
     types: {
       body: {}
       paramsTuple: [ParamValue]

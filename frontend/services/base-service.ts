@@ -1,3 +1,4 @@
+import { FormError } from "@/types/error"
 import { APIResponse } from "@shellbaby/shared/api-response"
 import { HttpStatus } from "@shellbaby/shared/http-status"
 
@@ -20,25 +21,37 @@ export async function customFetch<T>(
 
     const response = await fetch(`${API_URL}${_endpoint}`, config)
 
-    const result: APIResponse<T> = await response.json().catch(():APIResponse<null> => ({
-        success: false,
-        error:{
-            message: "Failed to parse response",
-            code: "PARSING_ERROR"
-        },
-        statusCode: response.status
-    }))
+    const result: APIResponse<T> = await response.json().catch(() => {
+        throw Error("Unable to parse information. Please try again later")
+    })
 
-    if (!response.ok || !result.success) {
-        if (result.statusCode === HttpStatus.UNAUTHORIZED) {
-            throw new Error("SESSION_EXPIRED")
+    if (!response.ok) {
+        if (response.status === HttpStatus.UNPROCESSABLE_ENTITY) {
+            throw new FormError(
+                "Please fix your information and try again",
+                response.status,
+                result.errors
+            )
         }
-
-        const error = new Error(result.error?.message || "An unknown error occured");
-        (error as any).code = result.error?.code;
-        (error as any).details = result.error?.details
-        throw error
     }
+
+    // if (!response.ok || !result.success) {
+    //     if (result.statusCode === HttpStatus.UNAUTHORIZED) {
+    //         throw new Error("SESSION_EXPIRED")
+    //     }
+
+    //     if (result.statusCode === HttpStatus.UNPROCESSABLE_ENTITY) {
+    //         throw new Error("")
+    //     }
+
+    //     const error = new Error(
+    //         result.error?.message ||
+    //             "An unknown error occured. Please try again later"
+    //     )
+    //     ;(error as any).code = result.error?.code
+    //     ;(error as any).details = result.error?.details
+    //     throw error
+    // }
 
     return result.data as T
 }

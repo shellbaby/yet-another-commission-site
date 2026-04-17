@@ -1,6 +1,7 @@
 import { appUrl } from "#config/app"
 import Client from "#models/client"
 import { signupValidator } from "#validators/client"
+import stringHelpers from "@adonisjs/core/helpers/string"
 import type { HttpContext } from "@adonisjs/core/http"
 import { signedUrlFor } from "@adonisjs/core/services/url_builder"
 import mail from "@adonisjs/mail/services/main"
@@ -22,15 +23,15 @@ export default class ClientsController {
     async store({ request, response }: HttpContext) {
         const payload = await request.validateUsing(signupValidator)
 
-        // const verificationToken = stringHelpers.generateRandom(64)
-        // const client = await Client.create({
-        //     ...payload,
-        //     verificationToken: verificationToken,
-        // })
+        const verificationToken = stringHelpers.generateRandom(64)
+        const client = await Client.create({
+            ...payload,
+            verificationToken: verificationToken,
+        })
 
         const signedURL = signedUrlFor(
             "auth.emails.verify",
-            { email: payload.email },
+            { email: client.email },
             {
                 expiresIn: "24h",
                 prefixUrl: appUrl,
@@ -42,18 +43,18 @@ export default class ClientsController {
             msg.to(payload.email)
                 .subject("Verify Your Account")
                 .htmlView("email/verify", {
-                    payload,
+                    client,
                     url: signedURL,
                 })
         })
 
-        // response.cookie("signup_status", "pending", {
-        //     httpOnly: false,
-        //     maxAge: "1h",
-        //     path: "/",
-        //     sameSite: "lax",
-        //     secure: process.env.NODE_ENV === "production",
-        // })
+        response.cookie("signup_status", "pending", {
+            httpOnly: false,
+            maxAge: "1h",
+            path: "/",
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+        })
 
         return response.created({
             message: "Client created",

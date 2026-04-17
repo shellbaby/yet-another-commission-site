@@ -47,4 +47,4 @@ router
             .prefix("auth")
             .as("auth")
     })
-    .prefix("/api/v1")
+    .prefix("/v1")
