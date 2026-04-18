@@ -11,7 +11,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 export default function Page() {
     return (
         <>
-            <h2 className="my-12 text-center">Terms of Service</h2>
+            <h2 className="mb-12 text-center">Terms of Service</h2>
             <Accordion.Root defaultValue={["general"]}>
                 <Accordion.Item value="general">
                     <Accordion.ItemTrigger>

@@ -26,7 +26,7 @@ export default function Page() {
 
     return (
         <div className="mx-auto max-w-md">
-            <h2 className="my-12 text-center">Sign In</h2>
+            <h2 className="mb-12 text-center">Sign In</h2>
 
             <div className="border-separator mt-4 rounded-md border-2 p-6">
                 <form

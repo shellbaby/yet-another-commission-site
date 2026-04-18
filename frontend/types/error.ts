@@ -1,13 +1,19 @@
 import { AdonisErrorType } from "@shellbaby/shared/api-response"
 import { HttpStatus } from "@shellbaby/shared/http-status"
 
-export class FormError extends Error {
-    errors?: AdonisErrorType[]
+export class GeneralError<T = any[]> extends Error {
     code: HttpStatus
+    errors?: T
 
-    constructor(message: string, code: HttpStatus, errors?: AdonisErrorType[]) {
+    constructor(message: string, code: HttpStatus, errors?: T) {
         super(message)
-        this.errors = errors
         this.code = code
+        this.errors = errors
+    }
+}
+
+export class FormError extends GeneralError<AdonisErrorType[]> {
+    constructor(message: string, code: HttpStatus, errors?: AdonisErrorType[]) {
+        super(message, code, errors)
     }
 }

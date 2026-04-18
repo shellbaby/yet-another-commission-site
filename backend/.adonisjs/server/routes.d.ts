@@ -23,6 +23,7 @@ export type ScannedRoutes = {
     'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.signup.status': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -33,6 +34,7 @@ export type ScannedRoutes = {
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.signup.status': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -43,6 +45,7 @@ export type ScannedRoutes = {
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.signup.status': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'client.clients.store': { paramsTuple?: []; params?: {} }

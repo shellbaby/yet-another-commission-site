@@ -1,4 +1,4 @@
-import { FormError } from "@/types/error"
+import { GeneralError } from "@/types/error"
 import { APIResponse } from "@shellbaby/shared/api-response"
 import { HttpStatus } from "@shellbaby/shared/http-status"
 
@@ -27,14 +27,14 @@ export async function customFetch<T>(
 
     if (!response.ok) {
         if (response.status === HttpStatus.UNPROCESSABLE_ENTITY) {
-            throw new FormError(
+            throw new GeneralError(
                 "Please fix your information and try again",
                 response.status,
                 result.errors
             )
         }
 
-        throw new FormError(
+        throw new GeneralError(
             "An unknown error occured, Please try again later",
             response.status
         )

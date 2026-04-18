@@ -27,14 +27,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={AnonymicePro.className}>
-            <body>
+            <body className="flex min-h-dvh flex-col">
                 <header className="my-4">
                     <Navigation />
                 </header>
 
                 <hr />
 
-                <div className="mt-12">{children}</div>
+                <div className="mt-12 flex-1">{children}</div>
 
                 <div className="my-12 text-center">
                     <small>

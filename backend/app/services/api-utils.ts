@@ -11,17 +11,11 @@ export function sendResponse<T>(
         statusCode: status,
     }
 }
-// export function sendError(
-//     message: string,
-//     code: string,
-//     status: HttpStatus
-// ): APIResponse {
-//     return {
-//         success: false,
-//         error: {
-//             message,
-//             code,
-//         },
-//         statusCode: status,
-//     }
-// }
+
+export function sendError(message: string, status: HttpStatus): APIResponse {
+    return {
+        success: false,
+        errors: [{ message }],
+        statusCode: status,
+    }
+}

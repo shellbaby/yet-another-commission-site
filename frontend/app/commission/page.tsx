@@ -63,7 +63,7 @@ export default function Page() {
 
     return (
         <>
-            <div className="my-12 text-center">
+            <div className="mb-12 text-center">
                 <h2>Commission Price</h2>
                 <p className="text-h6 mt-6 font-bold">
                     * Please carefully read the ToS first before commissioning *

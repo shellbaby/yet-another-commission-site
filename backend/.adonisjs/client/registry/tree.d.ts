@@ -36,5 +36,8 @@ export interface ApiDefinition {
     emails: {
       verify: typeof routes['auth.emails.verify']
     }
+    signup: {
+      status: typeof routes['auth.signup.status']
+    }
   }
 }

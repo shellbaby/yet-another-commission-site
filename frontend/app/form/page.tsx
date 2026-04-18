@@ -117,7 +117,7 @@ export default function Page() {
 
     return (
         <>
-            <h2 className="my-12 text-center">Commission Form</h2>
+            <h2 className="mb-12 text-center">Commission Form</h2>
             <form
                 className="rounded-default border-separator border-2 p-9"
                 onSubmit={formOnSubmit}

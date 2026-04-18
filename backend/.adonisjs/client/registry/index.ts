@@ -120,6 +120,12 @@ const routes = {
     tokens: [{"old":"/v1/auth/verify/:email","type":0,"val":"v1","end":""},{"old":"/v1/auth/verify/:email","type":0,"val":"auth","end":""},{"old":"/v1/auth/verify/:email","type":0,"val":"verify","end":""},{"old":"/v1/auth/verify/:email","type":1,"val":"email","end":""}],
     types: placeholder as Registry['auth.emails.verify']['types'],
   },
+  'auth.signup.status': {
+    methods: ["GET","HEAD"],
+    pattern: '/v1/auth/signup-status',
+    tokens: [{"old":"/v1/auth/signup-status","type":0,"val":"v1","end":""},{"old":"/v1/auth/signup-status","type":0,"val":"auth","end":""},{"old":"/v1/auth/signup-status","type":0,"val":"signup-status","end":""}],
+    types: placeholder as Registry['auth.signup.status']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

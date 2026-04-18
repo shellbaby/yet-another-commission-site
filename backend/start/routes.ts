@@ -43,6 +43,8 @@ router
                     controllers.email.Emails,
                     "verify",
                 ])
+
+                router.get("signup-status", [controllers.auth.Signup, "status"])
             })
             .prefix("auth")
             .as("auth")

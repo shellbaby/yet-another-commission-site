@@ -50,17 +50,20 @@ export default class ClientsController {
                 })
         })
 
-        response.cookie("signup_status", "pending", {
-            httpOnly: false,
-            maxAge: "1h",
-            path: "/",
-            sameSite: "lax",
-            secure: process.env.NODE_ENV === "production",
-        })
-
-        // return response.created({
-        //     message: "Client created",
-        // })
+        response.encryptedCookie(
+            "signup_status",
+            {
+                email: client.email,
+                status: "pending",
+            },
+            {
+                httpOnly: false,
+                maxAge: "1h",
+                path: "/",
+                sameSite: "lax",
+                secure: process.env.NODE_ENV === "production",
+            }
+        )
 
         return response.created(
             sendResponse({ message: "Client created" }, HttpStatus.CREATED)

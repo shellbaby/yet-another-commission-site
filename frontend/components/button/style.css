@@ -28,8 +28,8 @@
 
         &:disabled {
             cursor: not-allowed;
-            border-color: oklch(from var(--color) l c h / 0.3);
-            color: oklch(from var(--color) l c h / 0.3);
+            border-color: oklch(from var(--color) l c h / 0.5);
+            color: oklch(from var(--color) l c h / 0.5);
         }
     }
 }

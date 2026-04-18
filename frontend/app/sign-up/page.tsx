@@ -21,6 +21,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { AdonisErrorType } from "@shellbaby/shared/api-response"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useForm, useFormState, useWatch } from "react-hook-form"
 
@@ -37,6 +38,8 @@ const toaster = createToaster({
 export default function Page() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [hasServerError, setHasServerError] = useState<AdonisErrorType[]>()
+    const [isSuccess, setIsSuccess] = useState(false)
+    const router = useRouter()
 
     const {
         register,
@@ -59,19 +62,21 @@ export default function Page() {
             })
             .then((res) => {
                 if (res) {
-                    queueMicrotask(() => {
-                        toaster.create({
-                            title: (
-                                <span className="flex items-center gap-3">
-                                    <HugeiconsIcon
-                                        icon={CheckmarkCircle02Icon}
-                                    />
-                                    <span>Signed up successfully!</span>
-                                </span>
-                            ),
-                            type: "success",
-                        })
+                    setIsSuccess(true)
+
+                    toaster.create({
+                        title: (
+                            <span className="flex items-center gap-3">
+                                <HugeiconsIcon icon={CheckmarkCircle02Icon} />
+                                <span>Signed up successfully!</span>
+                            </span>
+                        ),
+                        type: "success",
                     })
+
+                    setTimeout(() => {
+                        router.push("/verify-email")
+                    }, 2000)
                 }
             })
     })
@@ -116,8 +121,8 @@ export default function Page() {
     }, [hasServerError])
 
     return (
-        <div className="p- mx-auto max-w-md">
-            <h2 className="my-12 text-center">Sign Up</h2>
+        <div className="mx-auto max-w-md">
+            <h2 className="mb-12 text-center">Sign Up</h2>
 
             <div className="border-separator mt-4 rounded-md border-2 p-6">
                 <form
@@ -248,8 +253,17 @@ export default function Page() {
                         className="mt-3"
                         disabled={isSubmitting}
                         type="submit"
+                        color={
+                            isSuccess
+                                ? "var(--color-success)"
+                                : "var(--color-primary)"
+                        }
                     >
-                        {isSubmitting ? "Signing Up..." : "Sign Up"}
+                        {isSubmitting
+                            ? isSuccess
+                                ? "Success!"
+                                : "Signing Up..."
+                            : "Sign Up"}
                     </Button>
                 </form>
             </div>
