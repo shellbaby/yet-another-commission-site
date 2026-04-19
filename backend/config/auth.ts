@@ -1,5 +1,4 @@
 import { defineConfig } from "@adonisjs/auth"
-import { tokensGuard, tokensUserProvider } from "@adonisjs/auth/access_tokens"
 import { sessionGuard, sessionUserProvider } from "@adonisjs/auth/session"
 import type { Authenticators, InferAuthEvents } from "@adonisjs/auth/types"
 
@@ -13,12 +12,12 @@ const authConfig = defineConfig({
         /**
          * Token-based guard for stateless API authentication.
          */
-        api: tokensGuard({
-            provider: tokensUserProvider({
-                tokens: "accessTokens",
-                model: () => import("#models/user"),
-            }),
-        }),
+        // api: tokensGuard({
+        //     provider: tokensUserProvider({
+        //         tokens: "accessTokens",
+        //         model: () => import("#models/user"),
+        //     }),
+        // }),
 
         /**
          * Session-based guard for browser authentication.

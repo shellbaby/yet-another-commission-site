@@ -6,53 +6,29 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'client.clients.store': {
+  'clients.store': {
     methods: ["POST"],
-    pattern: '/v1/clients',
-    tokens: [{"old":"/v1/clients","type":0,"val":"v1","end":""},{"old":"/v1/clients","type":0,"val":"clients","end":""}],
-    types: placeholder as Registry['client.clients.store']['types'],
+    pattern: '/v1/client',
+    tokens: [{"old":"/v1/client","type":0,"val":"v1","end":""},{"old":"/v1/client","type":0,"val":"client","end":""}],
+    types: placeholder as Registry['clients.store']['types'],
   },
   'client.clients.show': {
     methods: ["GET","HEAD"],
-    pattern: '/v1/clients/:id',
-    tokens: [{"old":"/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/v1/clients/:id","type":1,"val":"id","end":""}],
+    pattern: '/v1/client',
+    tokens: [{"old":"/v1/client","type":0,"val":"v1","end":""},{"old":"/v1/client","type":0,"val":"client","end":""}],
     types: placeholder as Registry['client.clients.show']['types'],
   },
   'client.clients.update': {
-    methods: ["PUT","PATCH"],
-    pattern: '/v1/clients/:id',
-    tokens: [{"old":"/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/v1/clients/:id","type":1,"val":"id","end":""}],
+    methods: ["PATCH"],
+    pattern: '/v1/client',
+    tokens: [{"old":"/v1/client","type":0,"val":"v1","end":""},{"old":"/v1/client","type":0,"val":"client","end":""}],
     types: placeholder as Registry['client.clients.update']['types'],
   },
   'client.clients.destroy': {
     methods: ["DELETE"],
-    pattern: '/v1/clients/:id',
-    tokens: [{"old":"/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/v1/clients/:id","type":1,"val":"id","end":""}],
+    pattern: '/v1/client',
+    tokens: [{"old":"/v1/client","type":0,"val":"v1","end":""},{"old":"/v1/client","type":0,"val":"client","end":""}],
     types: placeholder as Registry['client.clients.destroy']['types'],
-  },
-  'client.commissions.index': {
-    methods: ["GET","HEAD"],
-    pattern: '/v1/commissions',
-    tokens: [{"old":"/v1/commissions","type":0,"val":"v1","end":""},{"old":"/v1/commissions","type":0,"val":"commissions","end":""}],
-    types: placeholder as Registry['client.commissions.index']['types'],
-  },
-  'client.commissions.store': {
-    methods: ["POST"],
-    pattern: '/v1/commissions',
-    tokens: [{"old":"/v1/commissions","type":0,"val":"v1","end":""},{"old":"/v1/commissions","type":0,"val":"commissions","end":""}],
-    types: placeholder as Registry['client.commissions.store']['types'],
-  },
-  'client.commissions.show': {
-    methods: ["GET","HEAD"],
-    pattern: '/v1/commissions/:id',
-    tokens: [{"old":"/v1/commissions/:id","type":0,"val":"v1","end":""},{"old":"/v1/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/v1/commissions/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['client.commissions.show']['types'],
-  },
-  'client.commissions.destroy': {
-    methods: ["DELETE"],
-    pattern: '/v1/commissions/:id',
-    tokens: [{"old":"/v1/commissions/:id","type":0,"val":"v1","end":""},{"old":"/v1/commissions/:id","type":0,"val":"commissions","end":""},{"old":"/v1/commissions/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['client.commissions.destroy']['types'],
   },
   'admin.clients.index': {
     methods: ["GET","HEAD"],
@@ -125,6 +101,12 @@ const routes = {
     pattern: '/v1/auth/signup-status',
     tokens: [{"old":"/v1/auth/signup-status","type":0,"val":"v1","end":""},{"old":"/v1/auth/signup-status","type":0,"val":"auth","end":""},{"old":"/v1/auth/signup-status","type":0,"val":"signup-status","end":""}],
     types: placeholder as Registry['auth.signup.status']['types'],
+  },
+  'auth.session.store': {
+    methods: ["POST"],
+    pattern: '/v1/auth/signin',
+    tokens: [{"old":"/v1/auth/signin","type":0,"val":"v1","end":""},{"old":"/v1/auth/signin","type":0,"val":"auth","end":""},{"old":"/v1/auth/signin","type":0,"val":"signin","end":""}],
+    types: placeholder as Registry['auth.session.store']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

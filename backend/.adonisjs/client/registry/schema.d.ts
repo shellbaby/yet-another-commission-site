@@ -7,9 +7,9 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'client.clients.store': {
+  'clients.store': {
     methods: ["POST"]
-    pattern: '/v1/clients'
+    pattern: '/v1/client'
     types: {
       body: ExtractBody<InferInput<(typeof import('#validators/client').signupValidator)>>
       paramsTuple: []
@@ -21,23 +21,23 @@ export interface Registry {
   }
   'client.clients.show': {
     methods: ["GET","HEAD"]
-    pattern: '/v1/clients/:id'
+    pattern: '/v1/client'
     types: {
       body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
+      paramsTuple: []
+      params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['show']>>>
     }
   }
   'client.clients.update': {
-    methods: ["PUT","PATCH"]
-    pattern: '/v1/clients/:id'
+    methods: ["PATCH"]
+    pattern: '/v1/client'
     types: {
       body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
+      paramsTuple: []
+      params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['update']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['update']>>>
@@ -45,62 +45,14 @@ export interface Registry {
   }
   'client.clients.destroy': {
     methods: ["DELETE"]
-    pattern: '/v1/clients/:id'
+    pattern: '/v1/client'
     types: {
       body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
+      paramsTuple: []
+      params: {}
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/clients_controller').default['destroy']>>>
-    }
-  }
-  'client.commissions.index': {
-    methods: ["GET","HEAD"]
-    pattern: '/v1/commissions'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['index']>>>
-    }
-  }
-  'client.commissions.store': {
-    methods: ["POST"]
-    pattern: '/v1/commissions'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['store']>>>
-    }
-  }
-  'client.commissions.show': {
-    methods: ["GET","HEAD"]
-    pattern: '/v1/commissions/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['show']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['show']>>>
-    }
-  }
-  'client.commissions.destroy': {
-    methods: ["DELETE"]
-    pattern: '/v1/commissions/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client/commissions_controller').default['destroy']>>>
     }
   }
   'admin.clients.index': {
@@ -245,6 +197,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/signup_controller').default['status']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/signup_controller').default['status']>>>
+    }
+  }
+  'auth.session.store': {
+    methods: ["POST"]
+    pattern: '/v1/auth/signin'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/client').usernameValidator)>|InferInput<(typeof import('#validators/client').emailValidator)>|InferInput<(typeof import('#validators/client').passwordValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/client').usernameValidator)>|InferInput<(typeof import('#validators/client').emailValidator)>|InferInput<(typeof import('#validators/client').passwordValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
 }

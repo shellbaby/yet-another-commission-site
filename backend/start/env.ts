@@ -25,6 +25,8 @@ export default await Env.create(new URL("../", import.meta.url), {
     // Session
     SESSION_DRIVER: Env.schema.enum(["cookie", "memory", "database"] as const),
 
+    FRONTEND_URL: Env.schema.string({ format: "url", tld: false }),
+
     /*
   |----------------------------------------------------------
   | Variables for configuring the mail package

@@ -73,11 +73,9 @@ export default class ClientsController {
     /**
      * Show individual record
      */
-    async show({ params }: HttpContext) {
-        const client = await Client.query()
-            .where("uuid", params.uuid)
-            .firstOrFail()
-        return client.toJSON()
+    async show({ response, auth }: HttpContext) {
+        const client = auth.getUserOrFail()
+        return response.ok(sendResponse({ client }))
     }
 
     /**

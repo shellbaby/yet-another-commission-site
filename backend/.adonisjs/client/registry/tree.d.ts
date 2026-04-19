@@ -2,18 +2,14 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  clients: {
+    store: typeof routes['clients.store']
+  }
   client: {
     clients: {
-      store: typeof routes['client.clients.store']
       show: typeof routes['client.clients.show']
       update: typeof routes['client.clients.update']
       destroy: typeof routes['client.clients.destroy']
-    }
-    commissions: {
-      index: typeof routes['client.commissions.index']
-      store: typeof routes['client.commissions.store']
-      show: typeof routes['client.commissions.show']
-      destroy: typeof routes['client.commissions.destroy']
     }
   }
   admin: {
@@ -38,6 +34,9 @@ export interface ApiDefinition {
     }
     signup: {
       status: typeof routes['auth.signup.status']
+    }
+    session: {
+      store: typeof routes['auth.session.store']
     }
   }
 }

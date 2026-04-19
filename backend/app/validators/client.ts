@@ -16,3 +16,17 @@ export const signupValidator = vine.create({
     password: password(),
     name: vine.string().alphaNumeric().maxLength(255).optional(),
 })
+
+export const signinValidator = vine.create({})
+
+export const emailValidator = vine.create({
+    email: email(),
+})
+
+export const usernameValidator = vine.create({
+    username: vine.string().trim().maxLength(30),
+})
+
+export const passwordValidator = vine.create({
+    password: vine.string(),
+})

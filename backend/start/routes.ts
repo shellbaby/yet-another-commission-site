@@ -9,6 +9,7 @@
 
 import { controllers } from "#generated/controllers"
 import router from "@adonisjs/core/services/router"
+import { middleware } from "./kernel.ts"
 
 router.get("/", () => {
     return { hello: "world" }
@@ -16,16 +17,16 @@ router.get("/", () => {
 
 router
     .group(() => {
+        router.post("client", [controllers.client.Clients, "store"])
         router
             .group(() => {
-                router
-                    .resource("clients", controllers.client.Clients)
-                    .only(["store", "show", "update", "destroy"])
-                router
-                    .resource("commissions", controllers.client.Commissions)
-                    .only(["index", "store", "show", "destroy"])
+                router.get("/", [controllers.client.Clients, "show"])
+                router.patch("/", [controllers.client.Clients, "update"])
+                router.delete("/", [controllers.client.Clients, "destroy"])
             })
+            .prefix("client")
             .as("client")
+            .use(middleware.auth())
 
         router
             .group(() => {
@@ -45,6 +46,8 @@ router
                 ])
 
                 router.get("signup-status", [controllers.auth.Signup, "status"])
+
+                router.post("signin", [controllers.auth.Session, "store"])
             })
             .prefix("auth")
             .as("auth")

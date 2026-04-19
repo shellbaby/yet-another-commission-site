@@ -1,14 +1,42 @@
 "use client"
 
-import { Button, Checkbox, Field, PasswordInput } from "@/components"
-import { Tick02Icon, ViewIcon, ViewOffIcon } from "@hugeicons/core-free-icons"
+import {
+    Button,
+    Checkbox,
+    createToaster,
+    Field,
+    PasswordInput,
+    Portal,
+    Toast,
+    Toaster,
+} from "@/components"
+import { AuthService } from "@/services/auth/auth-service"
+import { GeneralError } from "@/types/error"
+import {
+    AlertCircleIcon,
+    Cancel01Icon,
+    Tick02Icon,
+    ViewIcon,
+    ViewOffIcon,
+} from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { HttpStatus } from "@shellbaby/shared/http-status"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
+const toaster = createToaster({
+    placement: "bottom-end",
+    overlap: true,
+    gap: 24,
+})
 export default function Page() {
+    const router = useRouter()
+    const [isSigningIn, setIsSigningIn] = useState(false)
+
     interface FormValues {
-        username_email: string
+        username: string
         password: string
         remember_me: string
     }
@@ -20,9 +48,36 @@ export default function Page() {
         control,
     } = useForm<FormValues>()
 
-    const formOnSubmit = handleSubmit((data: FormValues) => {
-        console.log(data)
-    })
+    const formOnSubmit = handleSubmit(
+        async ({ remember_me, ...data }: FormValues) => {
+            setIsSigningIn(true)
+            await AuthService.store({ ...data })
+                .catch((error: GeneralError) => {
+                    setIsSigningIn(false)
+                    const toasterObj = { title: "" }
+
+                    if (error.code === HttpStatus.BAD_REQUEST) {
+                        toasterObj.title = "Invalid credentials"
+                    } else {
+                        toasterObj.title = "Please try again later"
+                    }
+
+                    toaster.error({
+                        title: (
+                            <span className="flex items-center gap-3">
+                                <HugeiconsIcon icon={AlertCircleIcon} />
+                                <span>{toasterObj.title}</span>
+                            </span>
+                        ),
+                    })
+                })
+                .then((res) => {
+                    if (res) {
+                        router.push("/")
+                    }
+                })
+        }
+    )
 
     return (
         <div className="mx-auto max-w-md">
@@ -34,10 +89,10 @@ export default function Page() {
                     onSubmit={formOnSubmit}
                     noValidate
                 >
-                    <Field.Root required invalid={!!errors.username_email}>
+                    <Field.Root required invalid={!!errors.username}>
                         <Field.Label>Username or Email</Field.Label>
                         <Field.Input
-                            {...register("username_email", {
+                            {...register("username", {
                                 required:
                                     "Please fill out your username or email",
                                 pattern: {
@@ -48,7 +103,7 @@ export default function Page() {
                             })}
                         />
                         <Field.ErrorText>
-                            {errors.username_email?.message}
+                            {errors.username?.message}
                         </Field.ErrorText>
                     </Field.Root>
 
@@ -116,7 +171,9 @@ export default function Page() {
                             Forgot Password?
                         </Link>
                     </div>
-                    <Button type="submit">Sign In</Button>
+                    <Button type="submit" disabled={isSigningIn}>
+                        {isSigningIn ? "Signing In..." : "Sign In"}
+                    </Button>
                     <span className="text-center">
                         Not a member yet?{" "}
                         <Link href={"/sign-up"} className="font-bold">
@@ -125,6 +182,22 @@ export default function Page() {
                     </span>
                 </form>
             </div>
+
+            <Portal>
+                <Toaster toaster={toaster}>
+                    {(toast) => (
+                        <Toast.Root key={toast.id}>
+                            <Toast.Title>{toast.title}</Toast.Title>
+                            <Toast.Description>
+                                {toast.description}
+                            </Toast.Description>
+                            <Toast.CloseTrigger>
+                                <HugeiconsIcon icon={Cancel01Icon} />
+                            </Toast.CloseTrigger>
+                        </Toast.Root>
+                    )}
+                </Toaster>
+            </Portal>
         </div>
     )
 }

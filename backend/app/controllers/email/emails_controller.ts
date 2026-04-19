@@ -14,7 +14,8 @@ export default class EmailsController {
         client.verificationToken = null
         await client.save()
 
-        // await auth.use("web").login(client)
+        await auth.use("web").login(client)
+
         response.clearCookie("signup_status")
 
         return response

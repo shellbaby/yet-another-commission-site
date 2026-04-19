@@ -4,14 +4,10 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'client.clients.store': { paramsTuple?: []; params?: {} }
-    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.clients.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.commissions.index': { paramsTuple?: []; params?: {} }
-    'client.commissions.store': { paramsTuple?: []; params?: {} }
-    'client.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'clients.store': { paramsTuple?: []; params?: {} }
+    'client.clients.show': { paramsTuple?: []; params?: {} }
+    'client.clients.update': { paramsTuple?: []; params?: {} }
+    'client.clients.destroy': { paramsTuple?: []; params?: {} }
     'admin.clients.index': { paramsTuple?: []; params?: {} }
     'admin.clients.store': { paramsTuple?: []; params?: {} }
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -24,11 +20,10 @@ export type ScannedRoutes = {
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
+    'auth.session.store': { paramsTuple?: []; params?: {} }
   }
   GET: {
-    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.commissions.index': { paramsTuple?: []; params?: {} }
-    'client.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'client.clients.show': { paramsTuple?: []; params?: {} }
     'admin.clients.index': { paramsTuple?: []; params?: {} }
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
@@ -37,9 +32,7 @@ export type ScannedRoutes = {
     'auth.signup.status': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
-    'client.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.commissions.index': { paramsTuple?: []; params?: {} }
-    'client.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'client.clients.show': { paramsTuple?: []; params?: {} }
     'admin.clients.index': { paramsTuple?: []; params?: {} }
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
@@ -48,26 +41,24 @@ export type ScannedRoutes = {
     'auth.signup.status': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'client.clients.store': { paramsTuple?: []; params?: {} }
-    'client.commissions.store': { paramsTuple?: []; params?: {} }
+    'clients.store': { paramsTuple?: []; params?: {} }
     'admin.clients.store': { paramsTuple?: []; params?: {} }
     'admin.commissions.store': { paramsTuple?: []; params?: {} }
-  }
-  PUT: {
-    'client.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'admin.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'auth.session.store': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
-    'client.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'client.clients.update': { paramsTuple?: []; params?: {} }
     'admin.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
-    'client.clients.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'client.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'client.clients.destroy': { paramsTuple?: []; params?: {} }
     'admin.clients.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PUT: {
+    'admin.clients.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {
