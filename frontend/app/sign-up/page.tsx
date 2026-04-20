@@ -9,7 +9,7 @@ import {
     Toast,
     Toaster,
 } from "@/components"
-import { clientsService } from "@/services/client/clients-service"
+import { ClientStore } from "@/services/client/clients-service"
 import { Client } from "@/types/clients"
 import { FormError } from "@/types/error"
 import {
@@ -52,10 +52,7 @@ export default function Page() {
     const formOnSubmit = handleSubmit(async ({ retype_pwd, ...data }) => {
         setHasServerError(undefined)
         setIsSubmitting(true)
-        await clientsService
-            .store({
-                ...data,
-            })
+        await ClientStore({ ...data })
             .catch((error: FormError) => {
                 setHasServerError(error.errors)
                 setIsSubmitting(false)

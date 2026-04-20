@@ -26,7 +26,7 @@ router
             })
             .prefix("client")
             .as("client")
-            .use(middleware.auth())
+            .use(middleware.auth({ guards: ["api"] }))
 
         router
             .group(() => {

@@ -1,4 +1,6 @@
 import { Navigation } from "@/components"
+import { ClientShow } from "@/services/client/clients-service"
+import { GeneralError } from "@/types/error"
 import localFont from "next/font/local"
 import "../components/style"
 import "./globals.css"
@@ -20,16 +22,32 @@ const AnonymicePro = localFont({
     ],
 })
 
-export default function RootLayout({
+const getClient = async () => {
+    const client = await ClientShow()
+        .catch((error: GeneralError) => {
+            return null
+        })
+        .then((res) => {
+            if (res) {
+                return res.data
+            }
+        })
+
+    return client
+}
+
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const client = await getClient()
+
     return (
         <html lang="en" className={AnonymicePro.className}>
             <body className="flex min-h-dvh flex-col">
                 <header className="my-4">
-                    <Navigation />
+                    <Navigation clientName={client?.name ?? client?.username} />
                 </header>
 
                 <hr />

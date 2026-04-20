@@ -4,9 +4,12 @@ import { customFetch } from "../base-service"
 
 export const AuthService = {
     store: (data: SigninClientDTO) => {
-        return customFetch<APIResponse>("auth/signin", {
-            method: "POST",
-            body: JSON.stringify(data),
-        })
+        return customFetch<APIResponse<{ token: string; type: "bearer" }>>(
+            "auth/signin",
+            {
+                method: "POST",
+                body: JSON.stringify(data),
+            }
+        )
     },
 }

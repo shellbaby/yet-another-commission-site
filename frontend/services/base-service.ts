@@ -35,7 +35,7 @@ export async function customFetch<T>(
         }
 
         throw new GeneralError(
-            "An unknown error occured, Please try again later",
+            "An unknown error occured, please try again later",
             response.status
         )
     }

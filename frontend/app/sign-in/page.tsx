@@ -49,9 +49,10 @@ export default function Page() {
     } = useForm<FormValues>()
 
     const formOnSubmit = handleSubmit(
-        async ({ remember_me, ...data }: FormValues) => {
+        async ({ remember_me, ...clientData }: FormValues) => {
             setIsSigningIn(true)
-            await AuthService.store({ ...data })
+
+            const result = await AuthService.store({ ...clientData })
                 .catch((error: GeneralError) => {
                     setIsSigningIn(false)
                     const toasterObj = { title: "" }
@@ -73,9 +74,18 @@ export default function Page() {
                 })
                 .then((res) => {
                     if (res) {
-                        router.push("/")
+                        return res.data
                     }
                 })
+
+            const { token } = result ?? {}
+
+            await fetch("/api/auth/session", {
+                method: "POST",
+                body: JSON.stringify({ token }),
+            })
+
+            router.push("/")
         }
     )
 

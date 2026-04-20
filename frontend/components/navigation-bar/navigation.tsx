@@ -3,7 +3,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { Popover } from "../popover/popover"
 
-export const Navigation = () => {
+export const Navigation = ({ clientName }: { clientName?: string }) => {
     return (
         <nav className="flex h-20 items-center justify-between [&_a]:hover:underline">
             <Link href={"/"} className="flex h-full items-center px-2">
@@ -28,7 +28,11 @@ export const Navigation = () => {
                 </Popover.Root>
                 <Link href={"/gallery"}>gallery</Link>
                 <Link href={"/contact"}>contact</Link>
-                <Link href={"/sign-in"}>sign in</Link>
+                {clientName ? (
+                    <span>{clientName}</span>
+                ) : (
+                    <Link href={"/sign-in"}>sign in</Link>
+                )}
             </div>
         </nav>
     )

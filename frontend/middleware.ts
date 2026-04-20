@@ -36,6 +36,11 @@ export function middleware(request: NextRequest) {
         response.headers.set(key, value)
     })
 
+    // Protected routes
+    // const token = request.cookies.get("qilin_token")
+
+    // if (!to)
+
     return response
 }
 

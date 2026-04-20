@@ -51,10 +51,13 @@ export default class SessionController {
 
         const client = await Client.verifyCredentials(uid, password)
 
-        await auth.use("web").login(client)
+        const token = await Client.accessTokens.create(client)
 
         return response.send(
-            sendResponse({ message: "Redirect to home" }, HttpStatus.FOUND)
+            sendResponse(
+                { data: { token: token.value!.release(), type: "bearer" } },
+                HttpStatus.FOUND
+            )
         )
     }
 }

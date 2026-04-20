@@ -8,7 +8,9 @@ export interface Client {
 }
 
 export type StoreClientDTO = PartialOnly<Client, "name">
-export type ShowClientDTO = PartialOnly<Client, "name">
+export type ShowClientDTO = Omit<PartialOnly<Client, "name">, "password"> & {
+    uuid: string
+}
 export type UpdateClientDTO = Partial<Client>
 
 export type SigninClientDTO = Pick<Client, "username" | "password">

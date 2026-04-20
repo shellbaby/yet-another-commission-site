@@ -73,9 +73,19 @@ export default class ClientsController {
     /**
      * Show individual record
      */
-    async show({ response, auth }: HttpContext) {
+    async show({ response, auth, request }: HttpContext) {
+        console.log(auth.isAuthenticated)
         const client = auth.getUserOrFail()
-        return response.ok(sendResponse({ client }))
+        return response.ok(
+            sendResponse({
+                data: {
+                    username: client.username,
+                    email: client.email,
+                    name: client.name,
+                    uuid: client.clientUuid,
+                },
+            })
+        )
     }
 
     /**
