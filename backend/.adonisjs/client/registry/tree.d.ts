@@ -37,6 +37,7 @@ export interface ApiDefinition {
     }
     session: {
       store: typeof routes['auth.session.store']
+      destroy: typeof routes['auth.session.destroy']
     }
   }
 }

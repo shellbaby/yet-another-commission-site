@@ -44,10 +44,10 @@ router
                     controllers.email.Emails,
                     "verify",
                 ])
-
                 router.get("signup-status", [controllers.auth.Signup, "status"])
 
                 router.post("signin", [controllers.auth.Session, "store"])
+                router.get("signout", [controllers.auth.Session, "destroy"])
             })
             .prefix("auth")
             .as("auth")

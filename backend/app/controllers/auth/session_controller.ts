@@ -60,4 +60,13 @@ export default class SessionController {
             )
         )
     }
+
+    async destroy({ auth, response }: HttpContext) {
+        const currentClient = auth.user!
+        const currentToken = currentClient.currentAccessToken
+        const tokenId = currentToken!.identifier
+        await Client.accessTokens.delete(currentClient, tokenId)
+
+        response.ok(sendResponse({ data: { message: "Signed out" } }))
+    }
 }

@@ -6,6 +6,7 @@ import {
     useFileUpload,
     type FileUploadFileError,
 } from "@ark-ui/react/file-upload"
+import { Menu } from "@ark-ui/react/menu"
 import { PasswordInput } from "@ark-ui/react/password-input"
 import { Portal } from "@ark-ui/react/portal"
 import { createListCollection, Select } from "@ark-ui/react/select"
@@ -15,6 +16,7 @@ import {
     Toaster,
     useToastContext,
 } from "@ark-ui/react/toast"
+import { Avatar } from "./avatar/avatar"
 import { Button } from "./button/button"
 import { Carousel, type CarouselImage } from "./carousel/carousel"
 import { Field } from "./field/field"
@@ -24,6 +26,7 @@ import { Popover } from "./popover/popover"
 
 export {
     Accordion,
+    Avatar,
     Button,
     Carousel,
     CarouselImage,
@@ -35,6 +38,7 @@ export {
     FileUpload,
     FileUploadFileError,
     Mark,
+    Menu,
     Navigation,
     PasswordInput,
     Popover,

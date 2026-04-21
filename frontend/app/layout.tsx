@@ -47,7 +47,7 @@ export default async function RootLayout({
         <html lang="en" className={AnonymicePro.className}>
             <body className="flex min-h-dvh flex-col">
                 <header className="my-4">
-                    <Navigation clientName={client?.name ?? client?.username} />
+                    <Navigation clientPfp={client?.username} />
                 </header>
 
                 <hr />

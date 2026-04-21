@@ -108,6 +108,12 @@ const routes = {
     tokens: [{"old":"/v1/auth/signin","type":0,"val":"v1","end":""},{"old":"/v1/auth/signin","type":0,"val":"auth","end":""},{"old":"/v1/auth/signin","type":0,"val":"signin","end":""}],
     types: placeholder as Registry['auth.session.store']['types'],
   },
+  'auth.session.destroy': {
+    methods: ["GET","HEAD"],
+    pattern: '/v1/auth/signout',
+    tokens: [{"old":"/v1/auth/signout","type":0,"val":"v1","end":""},{"old":"/v1/auth/signout","type":0,"val":"auth","end":""},{"old":"/v1/auth/signout","type":0,"val":"signout","end":""}],
+    types: placeholder as Registry['auth.session.destroy']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

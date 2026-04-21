@@ -21,6 +21,7 @@ export type ScannedRoutes = {
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
     'auth.session.store': { paramsTuple?: []; params?: {} }
+    'auth.session.destroy': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'client.clients.show': { paramsTuple?: []; params?: {} }
@@ -30,6 +31,7 @@ export type ScannedRoutes = {
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
+    'auth.session.destroy': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'client.clients.show': { paramsTuple?: []; params?: {} }
@@ -39,6 +41,7 @@ export type ScannedRoutes = {
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
+    'auth.session.destroy': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'clients.store': { paramsTuple?: []; params?: {} }

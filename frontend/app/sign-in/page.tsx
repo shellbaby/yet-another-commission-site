@@ -10,7 +10,7 @@ import {
     Toast,
     Toaster,
 } from "@/components"
-import { AuthService } from "@/services/auth/auth-service"
+import { SessionStore } from "@/services/auth/auth-service"
 import { GeneralError } from "@/types/error"
 import {
     AlertCircleIcon,
@@ -52,7 +52,7 @@ export default function Page() {
         async ({ remember_me, ...clientData }: FormValues) => {
             setIsSigningIn(true)
 
-            const result = await AuthService.store({ ...clientData })
+            const result = await SessionStore({ ...clientData })
                 .catch((error: GeneralError) => {
                     setIsSigningIn(false)
                     const toasterObj = { title: "" }
@@ -80,7 +80,7 @@ export default function Page() {
 
             const { token } = result ?? {}
 
-            await fetch("/api/auth/session", {
+            await fetch("/api/auth/session/sign-in", {
                 method: "POST",
                 body: JSON.stringify({ token }),
             })
