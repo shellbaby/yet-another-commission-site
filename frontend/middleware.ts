@@ -37,13 +37,35 @@ export function middleware(request: NextRequest) {
     })
 
     // Protected routes
-    // const token = request.cookies.get("qilin_token")
+    const PROTECTED_ROUTES = ["/profile"]
+    const token = request.cookies.get("qilin_token")
+    const { pathname } = request.nextUrl
 
-    // if (!to)
+    const isProctectedRoute = PROTECTED_ROUTES.some((route) =>
+        pathname.startsWith(route)
+    )
+    if (isProctectedRoute && !token) {
+        return NextResponse.redirect(new URL("/sign-in", request.url))
+    }
 
-    return response
+    // Auth routes
+    const AUTH_ROUTES = ["/sign-in", "/sign-up"]
+    const isAuthRoute = AUTH_ROUTES.includes(pathname)
+
+    if (isAuthRoute && token) {
+        return NextResponse.redirect(new URL("/", request.url))
+    }
+
+    return NextResponse.next()
 }
 
 export const config = {
-    matcher: ["/:path*", "/"],
+    /*
+     * Match all except paths starting with:
+     * api
+     * _next/static
+     * _next/image
+     * favicon.ico
+     */
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 }

@@ -1,4 +1,5 @@
 import { Accordion } from "@ark-ui/react/accordion"
+import { Avatar } from "@ark-ui/react/avatar"
 import { Checkbox } from "@ark-ui/react/checkbox"
 import { Fieldset } from "@ark-ui/react/fieldset"
 import {
@@ -16,7 +17,6 @@ import {
     Toaster,
     useToastContext,
 } from "@ark-ui/react/toast"
-import { Avatar } from "./avatar/avatar"
 import { Button } from "./button/button"
 import { Carousel, type CarouselImage } from "./carousel/carousel"
 import { Field } from "./field/field"

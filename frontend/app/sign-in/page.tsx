@@ -85,7 +85,7 @@ export default function Page() {
                 body: JSON.stringify({ token }),
             })
 
-            router.push("/")
+            router.refresh()
         }
     )
 
