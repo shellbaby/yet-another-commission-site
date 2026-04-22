@@ -9,9 +9,7 @@ import {
     Toast,
     Toaster,
 } from "@/components"
-import { ClientStore } from "@/services/client/clients-service"
 import { Client } from "@/types/clients"
-import { FormError } from "@/types/error"
 import {
     AlertCircleIcon,
     Cancel01Icon,
@@ -20,9 +18,8 @@ import {
     ViewOffIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { AdonisErrorType } from "@shellbaby/shared/api-response"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useForm, useFormState, useWatch } from "react-hook-form"
 
 interface FormValues extends Client {
@@ -37,7 +34,6 @@ const toaster = createToaster({
 
 export default function Page() {
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [hasServerError, setHasServerError] = useState<AdonisErrorType[]>()
     const [isSuccess, setIsSuccess] = useState(false)
     const router = useRouter()
 
@@ -50,32 +46,43 @@ export default function Page() {
     } = useForm<FormValues>()
 
     const formOnSubmit = handleSubmit(async ({ retype_pwd, ...data }) => {
-        setHasServerError(undefined)
         setIsSubmitting(true)
-        await ClientStore({ ...data })
-            .catch((error: FormError) => {
-                setHasServerError(error.errors)
-                setIsSubmitting(false)
-            })
-            .then((res) => {
-                if (res) {
-                    setIsSuccess(true)
+        const result = await fetch("/api/client", {
+            method: "POST",
+            body: JSON.stringify({ ...data }),
+        })
 
-                    toaster.create({
-                        title: (
-                            <span className="flex items-center gap-3">
-                                <HugeiconsIcon icon={CheckmarkCircle02Icon} />
-                                <span>Signed up successfully!</span>
-                            </span>
-                        ),
-                        type: "success",
-                    })
+        if (!result.ok) {
+            setIsSubmitting(false)
 
-                    setTimeout(() => {
-                        router.push("/verify-email")
-                    }, 2000)
-                }
+            toaster.error({
+                title: (
+                    <span className="flex items-center gap-3">
+                        <HugeiconsIcon icon={AlertCircleIcon} />
+                        <span>Error {result.status}</span>
+                    </span>
+                ),
+                type: "error",
+                duration: Infinity,
             })
+
+            return
+        }
+
+        setIsSuccess(true)
+
+        toaster.success({
+            title: (
+                <span className="flex items-center gap-3">
+                    <HugeiconsIcon icon={CheckmarkCircle02Icon} />
+                    <span>Signed up successfully!</span>
+                </span>
+            ),
+        })
+
+        setTimeout(() => {
+            router.push("/verify-email")
+        }, 2000)
     })
 
     const { touchedFields } = useFormState({ control })
@@ -90,32 +97,6 @@ export default function Page() {
             message: "Please make sure password is secure enough",
         },
     })
-
-    useEffect(() => {
-        queueMicrotask(() => {
-            if (hasServerError) {
-                toaster.create({
-                    title: (
-                        <span className="flex items-center gap-3">
-                            <HugeiconsIcon icon={AlertCircleIcon} />
-                            <span>One or more fields need to be fixed</span>
-                        </span>
-                    ),
-                    description: (
-                        <ul className="mt-1">
-                            {hasServerError.map((msg, idx) => (
-                                <li key={idx} className="m-0!">
-                                    {msg.message}
-                                </li>
-                            ))}
-                        </ul>
-                    ),
-                    type: "error",
-                    duration: Infinity,
-                })
-            }
-        })
-    }, [hasServerError])
 
     return (
         <div className="mx-auto max-w-md">

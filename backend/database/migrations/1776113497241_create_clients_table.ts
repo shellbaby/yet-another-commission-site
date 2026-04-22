@@ -5,16 +5,16 @@ export default class extends BaseSchema {
 
     async up() {
         this.schema.createTable(this.tableName, (table) => {
-            table.increments("id", { primaryKey: false }).unique()
+            table.increments("id").notNullable().primary().unique()
 
             // From frontend //
-            table.string("username", 30).notNullable()
-            table.string("email", 254).notNullable().unique()
+            table.string("username", 30).notNullable().unique()
+            table.string("email", 255).notNullable()
             table.string("name", 255).nullable()
             table.string("password", 255).notNullable()
-            
+
             // Generated at backend //
-            table.uuid("client_uuid").primary()
+            table.uuid("client_uuid").notNullable().unique()
             table.boolean("is_verified").defaultTo(false)
             table.string("verification_token").nullable()
             table.timestamp("created_at", { useTz: true }).notNullable()

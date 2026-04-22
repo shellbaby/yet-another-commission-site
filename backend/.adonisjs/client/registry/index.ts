@@ -92,8 +92,8 @@ const routes = {
   },
   'auth.emails.verify': {
     methods: ["GET","HEAD"],
-    pattern: '/v1/auth/verify/:email',
-    tokens: [{"old":"/v1/auth/verify/:email","type":0,"val":"v1","end":""},{"old":"/v1/auth/verify/:email","type":0,"val":"auth","end":""},{"old":"/v1/auth/verify/:email","type":0,"val":"verify","end":""},{"old":"/v1/auth/verify/:email","type":1,"val":"email","end":""}],
+    pattern: '/v1/auth/verify/:uuid',
+    tokens: [{"old":"/v1/auth/verify/:uuid","type":0,"val":"v1","end":""},{"old":"/v1/auth/verify/:uuid","type":0,"val":"auth","end":""},{"old":"/v1/auth/verify/:uuid","type":0,"val":"verify","end":""},{"old":"/v1/auth/verify/:uuid","type":1,"val":"uuid","end":""}],
     types: placeholder as Registry['auth.emails.verify']['types'],
   },
   'auth.signup.status': {

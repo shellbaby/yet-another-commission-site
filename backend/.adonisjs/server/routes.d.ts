@@ -18,7 +18,7 @@ export type ScannedRoutes = {
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'uuid': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
     'auth.session.store': { paramsTuple?: []; params?: {} }
     'auth.session.destroy': { paramsTuple?: []; params?: {} }
@@ -29,7 +29,7 @@ export type ScannedRoutes = {
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'uuid': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
     'auth.session.destroy': { paramsTuple?: []; params?: {} }
   }
@@ -39,7 +39,7 @@ export type ScannedRoutes = {
     'admin.clients.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.commissions.index': { paramsTuple?: []; params?: {} }
     'admin.commissions.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'email': ParamValue} }
+    'auth.emails.verify': { paramsTuple: [ParamValue]; params: {'uuid': ParamValue} }
     'auth.signup.status': { paramsTuple?: []; params?: {} }
     'auth.session.destroy': { paramsTuple?: []; params?: {} }
   }

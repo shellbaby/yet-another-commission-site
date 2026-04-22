@@ -1,13 +1,14 @@
-import { GeneralError } from "@/types/error"
+"use server"
+
 import { APIResponse } from "@shellbaby/shared/api-response"
-import { HttpStatus } from "@shellbaby/shared/http-status"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export async function customFetch<T>(
     endpoint: string,
-    options: RequestInit = {}
-): Promise<T> {
+    options: RequestInit = {},
+    isURL: boolean = false
+): Promise<APIResponse<T>> {
     const config: RequestInit = {
         ...options,
         headers: {
@@ -17,46 +18,37 @@ export async function customFetch<T>(
         credentials: "include",
     }
 
+    const _url = isURL ? endpoint : ""
     const _endpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`
 
-    const response = await fetch(`${API_URL}${_endpoint}`, config)
+    const response = await fetch(`${_url ?? API_URL + _endpoint}`, config)
 
     const result: APIResponse<T> = await response.json().catch(() => {
-        throw Error("Unable to parse information. Please try again later")
+        return {
+            statusCode: response.status,
+            success: false,
+            errors: [
+                {
+                    message:
+                        "Unable to parse information. Please try again later",
+                },
+            ],
+        } as APIResponse
     })
 
     if (!response.ok) {
-        if (response.status === HttpStatus.UNPROCESSABLE_ENTITY) {
-            throw new GeneralError(
-                "Please fix your information and try again",
-                response.status,
-                result.errors
-            )
-        }
-
-        throw new GeneralError(
-            "An unknown error occured, please try again later",
-            response.status
-        )
+        return {
+            statusCode: response.status,
+            success: false,
+            errors: result.errors,
+            response,
+        } as APIResponse
     }
 
-    // if (!response.ok || !result.success) {
-    //     if (result.statusCode === HttpStatus.UNAUTHORIZED) {
-    //         throw new Error("SESSION_EXPIRED")
-    //     }
-
-    //     if (result.statusCode === HttpStatus.UNPROCESSABLE_ENTITY) {
-    //         throw new Error("")
-    //     }
-
-    //     const error = new Error(
-    //         result.error?.message ||
-    //             "An unknown error occured. Please try again later"
-    //     )
-    //     ;(error as any).code = result.error?.code
-    //     ;(error as any).details = result.error?.details
-    //     throw error
-    // }
-
-    return result.data as T
+    return {
+        statusCode: response.status,
+        success: true,
+        data: result.data as T,
+        response,
+    } as APIResponse<T>
 }

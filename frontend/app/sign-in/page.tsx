@@ -11,7 +11,6 @@ import {
     Toaster,
 } from "@/components"
 import { SessionStore } from "@/services/auth/auth-service"
-import { GeneralError } from "@/types/error"
 import {
     AlertCircleIcon,
     Cancel01Icon,
@@ -53,32 +52,28 @@ export default function Page() {
             setIsSigningIn(true)
 
             const result = await SessionStore({ ...clientData })
-                .catch((error: GeneralError) => {
-                    setIsSigningIn(false)
-                    const toasterObj = { title: "" }
 
-                    if (error.code === HttpStatus.BAD_REQUEST) {
-                        toasterObj.title = "Invalid credentials"
-                    } else {
-                        toasterObj.title = "Please try again later"
-                    }
+            if (!result.success) {
+                setIsSigningIn(false)
+                const toasterObj = { title: "" }
 
-                    toaster.error({
-                        title: (
-                            <span className="flex items-center gap-3">
-                                <HugeiconsIcon icon={AlertCircleIcon} />
-                                <span>{toasterObj.title}</span>
-                            </span>
-                        ),
-                    })
+                if (result.statusCode === HttpStatus.BAD_REQUEST) {
+                    toasterObj.title = "Invalid credentials"
+                } else {
+                    toasterObj.title = "Please try again later"
+                }
+
+                toaster.error({
+                    title: (
+                        <span className="flex items-center gap-3">
+                            <HugeiconsIcon icon={AlertCircleIcon} />
+                            <span>{toasterObj.title}</span>
+                        </span>
+                    ),
                 })
-                .then((res) => {
-                    if (res) {
-                        return res.data
-                    }
-                })
+            }
 
-            const { token } = result ?? {}
+            const { token } = result.data ?? {}
 
             await fetch("/api/auth/session/sign-in", {
                 method: "POST",

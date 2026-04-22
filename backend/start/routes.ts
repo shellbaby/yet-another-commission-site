@@ -40,10 +40,7 @@ router
 
         router
             .group(() => {
-                router.get("verify/:email", [
-                    controllers.email.Emails,
-                    "verify",
-                ])
+                router.get("verify/:uuid", [controllers.email.Emails, "verify"])
                 router.get("signup-status", [controllers.auth.Signup, "status"])
 
                 router.post("signin", [controllers.auth.Session, "store"])

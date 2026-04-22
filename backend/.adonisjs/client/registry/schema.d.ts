@@ -177,11 +177,11 @@ export interface Registry {
   }
   'auth.emails.verify': {
     methods: ["GET","HEAD"]
-    pattern: '/v1/auth/verify/:email'
+    pattern: '/v1/auth/verify/:uuid'
     types: {
       body: {}
       paramsTuple: [ParamValue]
-      params: { email: ParamValue }
+      params: { uuid: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/email/emails_controller').default['verify']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/email/emails_controller').default['verify']>>>

@@ -36,7 +36,7 @@ export class ClientSchema extends BaseModel {
   static $columns = ['clientUuid', 'createdAt', 'email', 'id', 'isVerified', 'name', 'password', 'updatedAt', 'username', 'verificationToken'] as const
   $columns = ClientSchema.$columns
   @column()
-  declare clientUuid: string | null
+  declare clientUuid: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -58,14 +58,16 @@ export class ClientSchema extends BaseModel {
 }
 
 export class CommissionSchema extends BaseModel {
-  static $columns = ['clientUuid', 'commissionNumber', 'createdAt', 'idea', 'notes', 'refSheet', 'status', 'type', 'updatedAt'] as const
+  static $columns = ['clientUuid', 'commissionUuid', 'createdAt', 'id', 'idea', 'notes', 'refSheet', 'status', 'type', 'updatedAt'] as const
   $columns = CommissionSchema.$columns
   @column()
   declare clientUuid: string
-  @column({ isPrimary: true })
-  declare commissionNumber: number
+  @column()
+  declare commissionUuid: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
   @column()
   declare idea: string
   @column()
@@ -73,9 +75,9 @@ export class CommissionSchema extends BaseModel {
   @column()
   declare refSheet: string
   @column()
-  declare status: string | null
+  declare status: any | null
   @column()
-  declare type: string
+  declare type: any
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

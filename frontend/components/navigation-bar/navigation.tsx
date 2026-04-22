@@ -1,5 +1,6 @@
 "use client"
 
+import { ClientContext } from "@/context/client-context"
 import { SessionDestroy } from "@/services/auth/auth-service"
 import { GeneralError } from "@/types/error"
 import { Avatar } from "@ark-ui/react/avatar"
@@ -9,8 +10,11 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useContext } from "react"
 
-export const Navigation = ({ clientPfp }: { clientPfp?: string }) => {
+export const Navigation = () => {
+    const { name, username } = useContext(ClientContext)
+
     const router = useRouter()
 
     const signout = async () => {
@@ -70,7 +74,7 @@ export const Navigation = ({ clientPfp }: { clientPfp?: string }) => {
                 </Menu.Root>
                 <Link href={"/gallery"}>gallery</Link>
                 <Link href={"/contact"}>contact</Link>
-                {clientPfp ? (
+                {username ? (
                     <Menu.Root
                         positioning={{
                             offset: { mainAxis: -3 },
@@ -89,7 +93,7 @@ export const Navigation = ({ clientPfp }: { clientPfp?: string }) => {
                                         height={590}
                                     />
                                 </Avatar.Fallback>
-                                <Avatar.Image alt="avatar" src={clientPfp} />
+                                <Avatar.Image alt="avatar" src={username} />
                             </Avatar.Root>
                         </Menu.Trigger>
 

@@ -5,6 +5,7 @@
     "type": "module",
     "exports": {
         "./http-status": "./http-status.ts",
-        "./api-response": "./api-response.ts"
+        "./api-response": "./api-response.ts",
+        "./types": "./types.ts"
     }
 }

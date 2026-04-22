@@ -1,4 +1,4 @@
-import Client from "#models/client"
+import { default as Client } from "#models/client"
 import { sendError, sendResponse } from "#services/api-utils"
 import {
     emailValidator,
@@ -49,16 +49,21 @@ export default class SessionController {
             )
         }
 
-        const client = await Client.verifyCredentials(uid, password)
+        try {
+            const client = await Client.verifyCredentials(uid, password)
+            const token = await Client.accessTokens.create(client)
 
-        const token = await Client.accessTokens.create(client)
-
-        return response.send(
-            sendResponse(
-                { data: { token: token.value!.release(), type: "bearer" } },
-                HttpStatus.FOUND
+            return response.send(
+                sendResponse(
+                    { data: { token: token.value!.release(), type: "bearer" } },
+                    HttpStatus.FOUND
+                )
             )
-        )
+        } catch (error) {
+            return response.badRequest(
+                sendError("Invalid credentials", HttpStatus.BAD_REQUEST)
+            )
+        }
     }
 
     async destroy({ auth, response }: HttpContext) {

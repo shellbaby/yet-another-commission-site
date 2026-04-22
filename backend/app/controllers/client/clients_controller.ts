@@ -23,6 +23,7 @@ export default class ClientsController {
      * Handle form submission for the create action
      */
     async store({ request, response }: HttpContext) {
+        // console.log(request.toJSON())
         const payload = await request.validateUsing(signupValidator)
 
         const verificationToken = stringHelpers.generateRandom(64)
@@ -33,7 +34,7 @@ export default class ClientsController {
 
         const signedURL = signedUrlFor(
             "auth.emails.verify",
-            { email: client.email },
+            { uuid: client.clientUuid },
             {
                 expiresIn: "24h",
                 prefixUrl: appUrl,
