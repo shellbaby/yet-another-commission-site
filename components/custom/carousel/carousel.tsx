@@ -6,18 +6,26 @@ import {
 } from "@/components/ui/carousel";
 import { UseEmblaCarouselType } from "embla-carousel-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
-export type CarouselSlides = {
+export type CarouselSlide = {
     src: string;
     alt: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
 };
 
 type CarouselApi = UseEmblaCarouselType[1];
 
-export const CarouselInner = ({ slides }: { slides: CarouselSlides[] }) => {
+export const CarouselInner = ({
+    slides,
+    fallbackDimension,
+    slideSize = "100%",
+}: {
+    slides: CarouselSlide[];
+    fallbackDimension: { width: number; height: number };
+    slideSize?: string;
+}) => {
     const { api } = useCarousel();
     const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
     const [selectedSnap, setSelectedSnap] = useState(0);
@@ -43,13 +51,21 @@ export const CarouselInner = ({ slides }: { slides: CarouselSlides[] }) => {
         <>
             <CarouselContent>
                 {slides.map((slide, idx) => (
-                    <CarouselItem key={idx}>
+                    <CarouselItem
+                        key={idx}
+                        style={
+                            {
+                                "--slide-size": slideSize,
+                                flex: "0 0 var(--slide-size)",
+                            } as CSSProperties
+                        }
+                    >
                         <Image
                             src={slide.src}
                             alt={slide.src}
-                            width={slide.width}
-                            height={slide.height}
-                            className="select-none"
+                            width={slide.width ?? fallbackDimension.width}
+                            height={slide.height ?? fallbackDimension.height}
+                            className="object-cover select-none"
                         />
                         <span className="text-xs select-none">{slide.alt}</span>
                     </CarouselItem>

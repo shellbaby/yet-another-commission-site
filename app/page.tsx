@@ -1,30 +1,24 @@
-import { CarouselInner, CarouselSlides } from "@/components/custom/carousel";
+import { CarouselInner, CarouselSlide } from "@/components/custom/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel } from "@/components/ui/carousel";
 import { ButterflyIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
 export default function Home() {
-    const showcaseImgs: CarouselSlides[] = [
+    const showcaseImgs: CarouselSlide[] = [
         {
             src: "/static/images/home/showcase-myko.webp",
             alt: "Myko, my Qilin/Pixiu OC",
-            width: 4096,
-            height: 4096,
         },
 
         {
             src: "/static/images/home/showcase-shellby.webp",
             alt: "Shellby, my otter OC",
-            width: 4096,
-            height: 4096,
         },
 
         {
             src: "/static/images/home/showcase-berry.webp",
             alt: "Berry, my bunny dragon OC",
-            width: 4096,
-            height: 4096,
         },
     ];
 
@@ -88,7 +82,10 @@ export default function Home() {
 
             <div className="col-span-3 flex flex-col gap-4">
                 <Carousel>
-                    <CarouselInner slides={showcaseImgs} />
+                    <CarouselInner
+                        slides={showcaseImgs}
+                        fallbackDimension={{ width: 4096, height: 4096 }}
+                    />
                 </Carousel>
 
                 <Card>

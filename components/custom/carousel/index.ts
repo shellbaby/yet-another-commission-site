@@ -1,1 +1,1 @@
-export { CarouselInner, type CarouselSlides } from "./carousel";
+export { CarouselInner, type CarouselSlide } from "./carousel";
