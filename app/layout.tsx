@@ -26,12 +26,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 "font-sans",
             )}
         >
-            <body className="flex min-h-full flex-col">
-                <div className="mx-auto w-full max-w-3xl">
+            <body className="h-full min-h-full">
+                <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
                     <div className="mx-auto my-8 w-fit">
                         <NavigationMenu />
                     </div>
-                    {children}
+                    <div className="flex-1">{children}</div>
+                    <div className="py-16 text-center">
+                        <small>
+                            Copyright&copy; 2026 shellbaby. All rights reserved.
+                        </small>
+                    </div>
                 </div>
             </body>
         </html>

@@ -1,18 +1,11 @@
+import { CarouselInner, CarouselSlides } from "@/components/custom/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from "@/components/ui/carousel";
-import Image from "next/image";
+import { Carousel } from "@/components/ui/carousel";
+import { ButterflyIcon } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
 
 export default function Home() {
-    const showcaseImgs: {
-        src: string;
-        alt: string;
-        width: number;
-        height: number;
-    }[] = [
+    const showcaseImgs: CarouselSlides[] = [
         {
             src: "/static/images/home/showcase-myko.webp",
             alt: "Myko, my Qilin/Pixiu OC",
@@ -37,7 +30,7 @@ export default function Home() {
 
     return (
         <div className="grid grid-cols-8 gap-8">
-            <div className="col-span-5">
+            <div className="col-span-5 flex flex-col gap-8">
                 <Card>
                     <CardContent>
                         <div className="flex flex-col gap-4">
@@ -57,26 +50,64 @@ export default function Home() {
                         </div>
                     </CardContent>
                 </Card>
+
+                <Card>
+                    <CardContent>
+                        <div className="flex flex-col gap-4">
+                            <h4>commission</h4>
+
+                            <h6>Commission is currently: Open</h6>
+
+                            <div>
+                                <p>What I&#39;m currently providing:</p>
+                                <ul className="list-inside list-[square]">
+                                    <li>Simple Drawing</li>
+                                </ul>
+                            </div>
+
+                            <p>
+                                For more information, please check the{" "}
+                                <Link
+                                    href={"/commission/form"}
+                                    className="underline"
+                                >
+                                    commission form
+                                </Link>{" "}
+                                and the{" "}
+                                <Link
+                                    href={"/commission/tos"}
+                                    className="underline"
+                                >
+                                    Terms of Service.
+                                </Link>
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
 
-            <div className="col-span-3">
+            <div className="col-span-3 flex flex-col gap-4">
                 <Carousel>
-                    <CarouselContent>
-                        {showcaseImgs.map((img, idx) => (
-                            <CarouselItem key={idx}>
-                                <Image
-                                    alt={img.alt}
-                                    src={img.src}
-                                    width={img.width}
-                                    height={img.height}
-                                />
-                                <span className="bg-white px-1 text-sm whitespace-nowrap select-none">
-                                    {img.alt}
-                                </span>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
+                    <CarouselInner slides={showcaseImgs} />
                 </Carousel>
+
+                <Card>
+                    <CardContent>
+                        <div className="flex flex-col gap-2">
+                            <h6>find me here!</h6>
+
+                            <div className="flex justify-center">
+                                <a
+                                    href="https://bsky.app/profile/poofy-eggnog.bsky.social"
+                                    className="text-bluesky"
+                                >
+                                    <ButterflyIcon size={24} />
+                                </a>
+                                {/* Add more sites, e.g. Mousepad, etc. */}
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
         </div>
     );
