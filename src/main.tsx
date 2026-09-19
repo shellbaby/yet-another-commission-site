@@ -1,26 +1,26 @@
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 
 import "./index.css";
-import App from "./App.tsx";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "./components/ui/navigation-menu.tsx";
+import { createRoot } from "react-dom/client";
 
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <div className="mx-auto h-dvh max-w-3xl">
-            {/* <NavigationMenu>
-                <NavigationMenuList>
-                    <NavigationMenuItem>
-                        <NavigationMenuLink>test</NavigationMenuLink>
-                    </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu> */}
-            <App />
-        </div>
-    </StrictMode>,
-);
+import { routeTree } from "./routeTree.gen";
+
+const router = createRouter({
+    routeTree,
+    defaultPreload: "intent",
+    scrollRestoration: true,
+});
+
+declare module "@tanstack/react-router" {
+    interface Register {
+        router: typeof router;
+    }
+}
+
+const rootEl = document.getElementById("root")!;
+
+if (!rootEl.innerHTML) {
+    const root = createRoot(rootEl);
+    root.render(<RouterProvider router={router} />);
+}
