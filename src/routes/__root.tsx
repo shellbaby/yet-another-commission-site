@@ -39,8 +39,8 @@ const commissionComponents: {
 function RootComponent() {
     return (
         <React.Fragment>
-            <div className="mx-auto h-dvh max-w-3xl">
-                <NavigationMenu className="w-full max-w-full mb-8">
+            <div className="mx-auto flex h-dvh max-w-3xl flex-col">
+                <NavigationMenu className="mb-8 w-full max-w-full flex-0">
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink
@@ -103,7 +103,14 @@ function RootComponent() {
                         </NavigationMenuItem>
                     </NavigationMenuList>
                 </NavigationMenu>
-                <Outlet />
+
+                <div className="flex-1">
+                    <Outlet />
+                </div>
+
+                <div className="py-16 text-center">
+                    <small>Copyright&copy; 2026 shellbaby. All rights reserved.</small>
+                </div>
             </div>
         </React.Fragment>
     );
