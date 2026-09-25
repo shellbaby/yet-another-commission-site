@@ -76,7 +76,7 @@
     --color-twitch: #9147ff;
     --color-kofi: #ff5a16;
     --color-success: var(--color-emerald-500);
-    --color-error: var(--destructive);
+    --color-error: var(--color-red-500);
 
     --line-height: calc(2px + 2ex + 2px);
 
